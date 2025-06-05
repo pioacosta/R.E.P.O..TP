@@ -1,0 +1,86 @@
+/* Importa tipografías de Google */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Open+Sans&display=swap");
+
+/* Estilo general del fondo de la sección principal con imagen */
+.hero {
+  min-height: 100vh; /* Altura completa de la ventana */
+  background: url("../img/fondo.png") center / cover no-repeat; /* Imagen centrada y cubriendo */
+  position: relative;
+  padding-top: 6rem; /* Espacio para evitar superposición con el header */
+  color: white;
+  font-family: "Open Sans", sans-serif;
+}
+
+/* Capa oscura sobre la imagen para mejorar legibilidad */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.4), transparent 70%);
+  z-index: 1;
+}
+
+/* Asegura que el contenido del hero quede encima del degradado */
+.hero > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Caja que contiene el título y el lema, con fondo translúcido y efecto vidrio */
+.hero-logo-box {
+  background: rgba(255, 255, 255, 0.247);
+  padding: 1.25rem 2rem;
+  border-radius: 0.75rem;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+}
+
+/* Estilo del logo R.E.P.O con sombra y tamaño adaptable */
+.repo-logo {
+  font-family: "Montserrat", sans-serif;
+  font-size: clamp(3rem, 8vw, 6rem);
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+  letter-spacing: 0.05rem;
+}
+
+/* Subtítulo o lema debajo del logo */
+.tagline {
+  font-size: 1.25rem;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* Caja de fondo translúcido con efecto vidrio */
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 1.5rem;
+  backdrop-filter: blur(10px) saturate(1.3);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Estilo para los enlaces del menú */
+.menu-link {
+  font-size: 1.3rem;
+  font-weight: 600;
+  font-family: "Open Sans", sans-serif;
+  letter-spacing: 0.04rem;
+  text-decoration: none;
+  color: inherit;
+  padding: 0.4rem 0.5rem;
+  border-radius: 0.5rem;
+  line-height: 1.6;
+  transition: all 0.3s ease;
+  display: inline-block;
+  position: relative;
+}
+
+/* Efecto al pasar el mouse sobre los enlaces */
+.menu-link:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: #0d6efd; /* azul Bootstrap */
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  text-decoration: none;
+}
