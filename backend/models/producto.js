@@ -1,8 +1,8 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/db");
 
-const Usuario = sequelize.define(
-  "Usuario",
+const Producto = sequelize.define(
+  "Producto",
   {
     id: {
       //datos de id
@@ -15,30 +15,30 @@ const Usuario = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    tipo: {
-      // datos de tipo
+    descripcion: {
+      type: DataTypes.TEXT,
+    },
+    precio: {
+      type: DataTypes.DECIMAL,
+      allowNull: false,
+    },
+    imagen: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    correo: {
-      // datos de correo
-      type: DataTypes.STRING,
-      unique: true,
-      allowNull: false,
-    },
-    contraseña: {
-      // datos de contraseña  queda hashear o encriptar contraseña
-      type: DataTypes.STRING,
+    activo: {
+      type: DataTypes.BOOLEAN,
       allowNull: false,
     },
     creado_en: {
-      // datos de creacion
       type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
     },
   },
   {
-    tableName: "usuarios", // nombre de la tabla a la ue hace referencia
-    timestamps: false, // desactiva createdAt y updatedAt automáticos
+    tableName: "productos", //nombre de la tabla a la ue hace referencia
+    timestamps: false,
   }
 );
-module.exports = Usuario;
+
+module.exports = Producto;
