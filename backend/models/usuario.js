@@ -1,5 +1,5 @@
-const { DataTypes } = require("sequelize");
-const sequelize = require("./config/db.js");
+const { DataTypes } = require('sequelize');
+const sequelize = require('../config/db');
 
 const Usuario = sequelize.define(
   "Usuario",
@@ -35,3 +35,4 @@ const Usuario = sequelize.define(
     timestamps: false, // desactiva createdAt y updatedAt automáticos
   }
 );
+module.exports = Usuario;
