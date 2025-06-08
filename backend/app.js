@@ -27,7 +27,7 @@ app.use((req, res) => {
 
 // Base de datos
 const sequelize = require("./config/db");
-const Producto = require("./models"); // Importar modelos
+require("./models"); // Importar modelos
 
 // Sincronizar DB y luego arrancar el servidor
 sequelize.sync({ alter: true }).then(() => {
