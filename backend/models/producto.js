@@ -28,7 +28,7 @@ const Producto = sequelize.define(
     },
     activo: {
       type: DataTypes.BOOLEAN,
-      allowNull: false,
+      defaultValue: true
     },
     creado_en: {
       type: DataTypes.DATE,

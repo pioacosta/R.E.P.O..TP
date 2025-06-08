@@ -10,8 +10,8 @@ const sequelize = new Sequelize(
   process.env.DB_PASS,
   {
     host: process.env.DB_HOST,
-    dialect: 'mysql', // ya que usás mysql2
-    logging: false, // opcional: evita ver consultas en consola
+    dialect: 'mysql', 
+    logging: false, 
   }
 );
 
