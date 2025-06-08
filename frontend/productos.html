@@ -11,7 +11,7 @@
     />
     <link href="./assets/css/styles.css" rel="stylesheet" />
   </head>
-  <body class="bg-light">
+  <body class="bg-light productos-page">
     <!--CUERPO: fondo general claro (bg-light), estructura principal del sitio-->
     <header class="bg-white shadow-sm position-fixed top-0 start-0 w-100 z-3">
       <div class="container py-2">
@@ -41,8 +41,32 @@
       <!--CONTENIDO PRINCIPAL: listado de productos por categoría para seleccionar-->
       <!--TÍTULO: encabezado principal de la pantalla-->
       <h1 class="text-center mb-4">Productos disponibles</h1>
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <input
+            type="text"
+            id="buscador"
+            class="form-control"
+            placeholder="Buscar producto por nombre..."
+          />
+        </div>
+        <div class="col-md-6">
+          <select id="filtroCategoria" class="form-select">
+            <option value="">Todas las categorías</option>
+          </select>
+        </div>
+      </div>
+
       <div id="productosContainer" class="row"></div>
     </main>
-    <script src="./js/productos.js"></script>
+    <script src="./js/productos.js" defer></script>
+    <div
+      id="alertaProducto"
+      class="alert alert-success position-fixed top-0 start-50 translate-middle-x mt-3 d-none z-3"
+      role="alert"
+      style="max-width: 300px"
+    >
+      Producto agregado al carrito
+    </div>
   </body>
 </html>

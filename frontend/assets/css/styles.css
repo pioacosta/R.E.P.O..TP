@@ -4,7 +4,7 @@
 /* Estilo general del fondo de la sección principal con imagen */
 .hero {
   min-height: 100vh; /* Altura completa de la ventana */
-  background: url("../img/fondo.png") center / cover no-repeat; /* Imagen centrada y cubriendo */
+  background: url("../img/fondo_principal.png") center / cover no-repeat; /* Imagen centrada y cubriendo */
   position: relative;
   padding-top: 6rem; /* Espacio para evitar superposición con el header */
   color: white;
@@ -60,4 +60,10 @@
   transform: translateY(-2px) scale(1.05);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   text-decoration: none;
+}
+
+/* Fondo para productos.html */
+body.productos-page {
+  background: url("../img/fondo_principal.png") no-repeat center center fixed;
+  background-size: cover;
 }
