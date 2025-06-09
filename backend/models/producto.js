@@ -26,9 +26,17 @@ const Producto = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    categoria_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: "categorias",
+        key: "id",
+      },
+    },
     activo: {
       type: DataTypes.BOOLEAN,
-      defaultValue: true
+      defaultValue: true,
     },
     creado_en: {
       type: DataTypes.DATE,
