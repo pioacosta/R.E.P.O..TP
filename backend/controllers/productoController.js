@@ -17,6 +17,7 @@ const crearProducto = async (req, res) => {
       descripcion: req.body.descripcion,
       precio: req.body.precio,
       imagen: req.body.imagen,
+      categoria_id: req.body.categoria_id
     });
     // 201 es que se creo bien
     res.status(201).json(productoNuevo);
@@ -38,6 +39,7 @@ const modificarProducto = async (req, res) => {
       descripcion: req.body.descripcion,
       precio: req.body.precio,
       imagen: req.body.imagen,
+      categoria_id: req.body.categoria_id
     });
 
     res.json(producto);
