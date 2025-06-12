@@ -17,9 +17,9 @@ const crearProducto = async (req, res) => {
       descripcion: req.body.descripcion,
       precio: req.body.precio,
       imagen: req.body.imagen,
-      categoria_id: req.body.categoria_id
+      categoria_id: req.body.categoria_id,
     });
-    // 201 es que se creo bien
+    // 201 es que se creó bien
     res.status(201).json(productoNuevo);
   } catch (error) {
     //500 error interno(?
@@ -39,7 +39,7 @@ const modificarProducto = async (req, res) => {
       descripcion: req.body.descripcion,
       precio: req.body.precio,
       imagen: req.body.imagen,
-      categoria_id: req.body.categoria_id
+      categoria_id: req.body.categoria_id,
     });
 
     res.json(producto);
@@ -52,21 +52,20 @@ const eliminarProducto = async (req, res) => {
   try {
     const producto = await Producto.findByPk(req.params.id);
     if (!producto) {
-      return res.status(404).json({ mensaje: 'Producto no encontrado' });
+      return res.status(404).json({ mensaje: "Producto no encontrado" });
     }
 
     await producto.destroy();
-    res.json({ mensaje: 'Producto eliminado correctamente' });
+    res.json({ mensaje: "Producto eliminado correctamente" });
   } catch (error) {
-    res.status(500).json({ mensaje: 'Error al eliminar el producto', error });
+    res.status(500).json({ mensaje: "Error al eliminar el producto", error });
   }
 };
-
 
 module.exports = {
   listarProductos,
   obtenerProductoPorId,
   crearProducto,
   modificarProducto,
-  eliminarProducto
+  eliminarProducto,
 };

@@ -30,8 +30,16 @@ const sequelize = require("./config/db");
 require("./models"); // Importar modelos
 
 // Sincronizar DB y luego arrancar el servidor
-sequelize.sync({ alter: true }).then(() => {
+const { Categoria } = require("./models");
+
+sequelize.sync({ alter: true }).then(async () => {
   console.log("🔄 Base de datos sincronizada con Sequelize.");
+
+  // Crear categorías por defecto si no existen
+  const categoriasPorDefecto = ["Limpieza", "Cuidado personal"];
+  for (const nombre of categoriasPorDefecto) {
+    await Categoria.findOrCreate({ where: { nombre } });
+  }
 
   const PORT = process.env.PORT || 3000;
   app.listen(PORT, () => {

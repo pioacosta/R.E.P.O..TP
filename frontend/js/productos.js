@@ -8,25 +8,29 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     categorias.forEach((cat) => {
       const option = document.createElement("option");
-      option.value = cat.categoria;
-      option.textContent = cat.categoria;
+      option.value = cat.nombre;
+      option.textContent = cat.nombre;
       filtroCategoria.appendChild(option);
     });
 
     // 🟦 Cargar productos
-    const response = await fetch("http://localhost:3000/productos");
-    const productos = await response.json();
-
-    // Filtrar productos activos
+    const resProd = await fetch("http://localhost:3000/productos");
+    const productos = await resProd.json();
     const activos = productos.filter((p) => p.activo !== false);
 
-    // Guardar globalmente para filtros
+    // Guardar para filtrado global
     window.todosLosProductos = activos;
+
+    // Asociar nombre de categoría al producto
+    activos.forEach((prod) => {
+      const cat = categorias.find((c) => c.id === prod.categoria_id);
+      prod.categoria = cat ? cat.nombre : "Sin categoría";
+    });
 
     // Mostrar productos
     renderizarProductos(activos);
 
-    // Eventos de filtros
+    // Eventos de búsqueda y filtro
     document
       .getElementById("buscador")
       .addEventListener("input", aplicarFiltros);
@@ -113,4 +117,23 @@ function aplicarFiltros() {
   });
 
   renderizarProductos(filtrados);
+}
+
+async function cargarCategorias() {
+  try {
+    const response = await fetch("http://localhost:3000/categorias");
+    const categorias = await response.json();
+
+    const select = document.getElementById("filtroCategoria");
+
+    // Agrega una opción por cada categoría recibida
+    categorias.forEach((cat) => {
+      const option = document.createElement("option");
+      option.value = cat.nombre;
+      option.textContent = cat.nombre;
+      select.appendChild(option);
+    });
+  } catch (error) {
+    console.error("Error al cargar las categorías:", error);
+  }
 }
