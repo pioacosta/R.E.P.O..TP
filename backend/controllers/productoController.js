@@ -62,10 +62,44 @@ const eliminarProducto = async (req, res) => {
   }
 };
 
+const darDeBajaProducto = async (req, res) => {
+  try {
+    const producto = await Producto.findByPk(req.params.id);
+    if (!producto) {
+      return res.status(404).json({ mensaje: "Producto no encontrado" });
+    }
+    producto.activo = false;
+    await producto.save();
+    res.json({ mensaje: "Producto dado de baja correctamente", producto });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ mensaje: "Error al dar de baja el producto", error });
+  }
+};
+
+const darDeAltaProducto = async (req, res) => {
+  try {
+    const producto = await Producto.findByPk(req.params.id);
+    if (!producto) {
+      return res.status(404).json({ mensaje: "Producto no encontrado" });
+    }
+    producto.activo = true;
+    await producto.save();
+    res.json({ mensaje: "Producto dado de alta correctamente", producto });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ mensaje: "Error al dar de alta el producto", error });
+  }
+};
+
 module.exports = {
   listarProductos,
   obtenerProductoPorId,
   crearProducto,
   modificarProducto,
   eliminarProducto,
+  darDeBajaProducto,
+  darDeAltaProducto,
 };
