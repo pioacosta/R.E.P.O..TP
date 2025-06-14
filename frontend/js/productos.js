@@ -42,7 +42,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 });
 
-function agregarCantidad(id) {
+const cargarProductos = async () => {
+  const resProd = await fetch("http://localhost:3000/productos");
+  const productos = await resProd.json();
+  const activos = productos.filter((p) => p.activo !== false);
+  return activos;
+};
+
+const agregarCantidad = async (id) => {
   const input = document.querySelector(`.cantidad-input[data-id="${id}"]`);
   const raw = input.value.trim();
   const cantidad = parseInt(raw);
@@ -53,18 +60,36 @@ function agregarCantidad(id) {
     return;
   }
 
-  let carrito = JSON.parse(sessionStorage.getItem("carrito")) || [];
+  // Esperamos la lista de productos correctamente
+  const productos = await cargarProductos();
+  const productoSeleccionado = productos.find(p => p.id === id);
+
+  if (!productoSeleccionado) {
+    alert("Producto no encontrado.");
+    return;
+  }
+
+  let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
   const existente = carrito.find((p) => p.id === id);
 
   if (existente) {
     existente.cantidad += cantidad;
   } else {
-    carrito.push({ id, cantidad });
+    carrito.push({
+      id: productoSeleccionado.id,
+      nombre: productoSeleccionado.nombre,
+      precio: productoSeleccionado.precio,
+      imagen: `./${productoSeleccionado.imagen}`,
+      cantidad: cantidad
+    });
+
+    console.log(productoSeleccionado.imagen)
+    console.log(productoSeleccionado)
   }
 
-  sessionStorage.setItem("carrito", JSON.stringify(carrito));
-  mostrarAlerta();
-}
+  localStorage.setItem("carrito", JSON.stringify(carrito));
+};
+
 
 function renderizarProductos(lista) {
   const contenedor = document.getElementById("productosContainer");
