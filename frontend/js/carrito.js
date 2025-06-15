@@ -9,17 +9,20 @@ const productosPrueba = [
 ];
 
 document.addEventListener("DOMContentLoaded", async () => {
+  document
+    .getElementById("finalizarCompra")
+    .addEventListener("click", confirmarCompra);
+
   const productosCarrito = obtenerCarrito();
-  console.log(productosCarrito);
   renderizarProductos(productosCarrito);
 });
 
 function guardarCarrito(carrito) {
-  localStorage.setItem("carrito", JSON.stringify(carrito));
+  sessionStorage.setItem("carrito", JSON.stringify(carrito));
 }
 
 function obtenerCarrito() {
-  return JSON.parse(localStorage.getItem("carrito")) || [];
+  return JSON.parse(sessionStorage.getItem("carrito")) || [];
 }
 
 function renderizarProductos(lista) {
@@ -35,7 +38,6 @@ function renderizarProductos(lista) {
   }
 
   lista.forEach((prod) => {
-    console.log(prod.imagen);
     const fila = document.createElement("div");
     fila.className = "mb-3";
 
@@ -79,10 +81,6 @@ function renderizarProductos(lista) {
   });
 }
 
-function obtenerCarrito() {
-  return JSON.parse(localStorage.getItem("carrito")) || [];
-}
-
 function eliminarDelCarrito(id) {
   let carrito = obtenerCarrito();
   carrito = carrito.filter((p) => p.id !== id);
@@ -95,7 +93,6 @@ function aumentarCantidad(id) {
   const producto = carrito.find((p) => p.id === id);
   if (producto && producto.cantidad < 100) {
     producto.cantidad += 1;
-    console.log(producto.cantidad);
     guardarCarrito(carrito);
     renderizarProductos(carrito);
     calcularTotal(carrito);
@@ -121,6 +118,23 @@ function calcularTotal(lista) {
   }, 0);
 
   textTotal.innerHTML = `${total}`;
+}
+
+function vaciarCarrito(){
+  sessionStorage.removeItem("carrito");
+}
+
+
+function confirmarCompra() {
+  ticket = obtenerCarrito();
+  if (ticket.length === 0) {
+    alert("No hay productos en tu carrito!");
+    return;
+  } else {
+    sessionStorage.setItem("ticket", JSON.stringify(ticket));
+    vaciarCarrito();
+    window.location.href = "ticket.html";
+  }
 }
 
 function mostrarAlerta() {

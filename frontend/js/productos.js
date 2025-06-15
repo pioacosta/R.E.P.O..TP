@@ -69,7 +69,7 @@ const agregarCantidad = async (id) => {
     return;
   }
 
-  let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+  let carrito = JSON.parse(sessionStorage.getItem("carrito")) || [];
   const existente = carrito.find((p) => p.id === id);
 
   if (existente) {
@@ -87,7 +87,7 @@ const agregarCantidad = async (id) => {
     console.log(productoSeleccionado)
   }
 
-  localStorage.setItem("carrito", JSON.stringify(carrito));
+  sessionStorage.setItem("carrito", JSON.stringify(carrito));
 };
 
 

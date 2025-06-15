@@ -60,21 +60,13 @@
         <hr>
         <p class="fs-5 mb-2">Total:</p>
         <p class="fs-3 fw-bold" id="totalCarrito">$0</p>
-        <button class="btn btn-success w-100 mt-3" onclick="confirmarCompra()">
+        <button type="button" id="finalizarCompra" class="btn btn-success w-100 mt-3">
           Finalizar Compra
         </button>
       </div>
     </div>
   </div>
 </main>
-  <script>
-    function confirmarCompra() {
-      const confirmar = confirm("¿Deseás finalizar tu compra?");
-      if (confirmar) {
-        window.location.href = "./ticket.html";
-      }
-    }
-  </script>
   <script src="./js/carrito.js"></script>
 </body>
 
