@@ -1,0 +1,48 @@
+body {
+  padding-top: 80px; /* si toda la página tiene navbar fijo */
+}
+
+/* Contenedor general */
+form {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Inputs y selects */
+form .form-control,
+form .form-select {
+  border-radius: 0.5rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* Efecto al enfocar inputs */
+form .form-control:focus,
+form .form-select:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+/* Botón principal */
+form .btn-primary {
+  padding: 0.6rem 2rem;
+  font-weight: 500;
+  border-radius: 2rem;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+/* Hover del botón */
+form .btn-primary:hover {
+  background-color: #0b5ed7;
+  transform: translateY(-2px);
+}
+
+/* Tooltip de validación */
+.invalid-tooltip,
+.valid-tooltip {
+  font-size: 0.875rem;
+  border-radius: 0.5rem;
+}
+
+/* Espaciad*

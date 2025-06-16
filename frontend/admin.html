@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="./assets/css/admin.css" rel="stylesheet" />
+    <title>Dashboard</title>
+</head>
+
+<body class="bg-light" style="
+      background: url('./assets/img/admin.png') center / cover
+        no-repeat;
+      min-height: 100vh;
+    ">
+    <header class="bg-white shadow-sm position-fixed top-0 start-0 w-100 z-3">
+        <div class="container py-2">
+            <ul class="nav nav-tabs justify-content-between">
+                <li class="nav-item">
+                    <a class="nav-link" href="./bienvenida.html">Bienvenida</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./inicio.html">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./productos.html">Productos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./carrito.html">Carrito</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./ticket.html">Ticket</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-danger" href="./admin.html">Admin</a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 col-lg-8">
+                <form class="row g-3 needs-validation" novalidate>
+                    <!-- Nombre -->
+                    <div class="col-12 position-relative">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" required>
+                        <div class="invalid-tooltip">El nombre es requerido.</div>
+                    </div>
+
+                    <!-- Descripción -->
+                    <div class="col-12 position-relative">
+                        <label for="descripcion" class="form-label">Descripción</label>
+                        <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
+                        <div class="invalid-tooltip">La descripción es requerida.</div>
+                    </div>
+
+                    <!-- Precio -->
+                    <div class="col-12 col-sm-6 position-relative">
+                        <label for="precio" class="form-label">Precio</label>
+                        <input type="number" class="form-control" id="precio" name="precio" min="0" step="0.01"
+                            required>
+                        <div class="invalid-tooltip">Por favor, ingrese un precio válido.</div>
+                    </div>
+
+                    <!-- Imagen -->
+                    <div class="col-12 col-sm-6 position-relative">
+                        <label for="imagen" class="form-label">Imagen</label>
+                        <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*" required>
+                        <div class="invalid-tooltip">Suba una imagen válida.</div>
+                    </div>
+
+                    <!-- Categoría -->
+                    <div class="col-12 col-sm-6 position-relative">
+                        <label for="categoria_id" class="form-label">Categoría</label>
+                        <select class="form-select" id="categoria_id" name="categoria_id" required>
+                            <option selected disabled value="">Seleccione una categoría</option>
+
+                        </select>
+                        <div class="invalid-tooltip">Seleccione una categoría válida.</div>
+                    </div>
+
+                    <!-- Botón -->
+                    <div class="col-12 text-center">
+                        <button class="btn btn-primary" type="submit">Agregar Producto</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

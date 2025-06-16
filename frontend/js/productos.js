@@ -102,6 +102,8 @@ function renderizarProductos(lista) {
   }
 
   lista.forEach((prod) => {
+    console.log(prod.imagen)
+
     const col = document.createElement("div");
     col.className = "col-md-4 mb-4";
 
