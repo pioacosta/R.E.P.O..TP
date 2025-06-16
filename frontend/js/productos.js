@@ -79,7 +79,7 @@ const agregarCantidad = async (id) => {
       id: productoSeleccionado.id,
       nombre: productoSeleccionado.nombre,
       precio: productoSeleccionado.precio,
-      imagen: `./${productoSeleccionado.imagen}`,
+      imagen: productoSeleccionado.imagen,
       cantidad: cantidad
     });
 
