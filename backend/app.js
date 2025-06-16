@@ -13,6 +13,9 @@ const productosRouter = require("./routes/productosRoutes");
 const ventasRouter = require("./routes/ventasRouter");
 const productosVentasRouter = require("./routes/productosVentasRouter");
 
+
+app.use("/storage", express.static("storage"));
+
 // Rutas de la API
 app.use("/usuarios", usuariosRouter);
 app.use("/categorias", categoriaRouter);
