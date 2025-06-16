@@ -12,18 +12,25 @@ const obtenerProductoPorId = async (req, res) => {
 
 const crearProducto = async (req, res) => {
   try {
+
+    const img = req.file;
+    const imgURL = `${req.protocol}://${req.get('host')}/storage/img/${img.filename}`
+
     const productoNuevo = await Producto.create({
       nombre: req.body.nombre,
       descripcion: req.body.descripcion,
       precio: req.body.precio,
-      imagen: req.body.imagen,
+      imagen: imgURL, // nombre del archivo subido
       categoria_id: req.body.categoria_id,
     });
-    // 201 es que se creó bien
-    res.status(201).json(productoNuevo);
+
+    res.status(201).json({
+      mensaje: "Producto creado correctamente",
+      producto: productoNuevo
+    });
   } catch (error) {
-    //500 error interno(?
-    res.status(500).json({ mensaje: "Error al editar el producto", error });
+    console.error(error);
+    res.status(500).json({ mensaje: "Error al crear producto", error: error.message });
   }
 };
 
@@ -38,7 +45,7 @@ const modificarProducto = async (req, res) => {
       nombre: req.body.nombre,
       descripcion: req.body.descripcion,
       precio: req.body.precio,
-      imagen: req.body.imagen,
+      imagen: req.file ? req.file.filename : null,
       categoria_id: req.body.categoria_id,
     });
 
