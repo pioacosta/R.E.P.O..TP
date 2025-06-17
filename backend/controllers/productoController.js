@@ -41,11 +41,15 @@ const modificarProducto = async (req, res) => {
     if (!producto)
       return res.status(404).json({ mensaje: "Producto no encontrado" });
 
+    const img = req.file;
+    const imgURL = `${req.protocol}://${req.get('host')}/storage/img/${img.filename}`
+    
+
     await producto.update({
       nombre: req.body.nombre,
       descripcion: req.body.descripcion,
       precio: req.body.precio,
-      imagen: req.file ? req.file.filename : null,
+      imagen: imgURL,
       categoria_id: req.body.categoria_id,
     });
 
