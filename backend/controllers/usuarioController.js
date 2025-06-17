@@ -1,4 +1,5 @@
 const Usuario = require("../models/usuario");
+const bcrypt = require("bcryptjs");
 
 const listarUsuarios = async (req, res) => {
   const usuarios = await Usuario.findAll();
@@ -12,13 +13,15 @@ const obtenerUsuarioPorId = async (req, res) => {
 
 const crearUsuario = async (req, res) => {
   try {
-    const usuarioNuevo = await Usuario.create({
+    // Solo un admin puede crear otro admin
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    const nuevoUsuario = await Usuario.create({
       nombre: req.body.nombre,
       email: req.body.email,
-      password: req.body.password,
+      password: hashedPassword,
       rol: req.body.rol,
     });
-    res.status(201).json(usuarioNuevo);
+    res.status(201).json(nuevoUsuario);
   } catch (error) {
     res.status(500).json({ mensaje: "Error al crear el usuario", error });
   }

@@ -15,25 +15,26 @@ const Usuario = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    tipo: {
-      // datos de tipo
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    correo: {
+    email: {
       // datos de correo
       type: DataTypes.STRING,
       unique: true,
       allowNull: false,
     },
-    contraseña: {
+    password: {
       // datos de contraseña  queda hashear o encriptar contraseña
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    rol: {
+      // datos de tipo
       type: DataTypes.STRING,
       allowNull: false,
     },
     creado_en: {
       // datos de creacion
       type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
     },
   },
   {

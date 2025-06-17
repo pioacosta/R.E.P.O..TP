@@ -12,7 +12,7 @@ const categoriaRouter = require("./routes/categoriaRoutes");
 const productosRouter = require("./routes/productosRoutes");
 const ventasRouter = require("./routes/ventasRouter");
 const productosVentasRouter = require("./routes/productosVentasRouter");
-
+const authRoutes = require("./routes/authRoutes");
 
 app.use("/storage", express.static("storage"));
 
@@ -22,6 +22,7 @@ app.use("/categorias", categoriaRouter);
 app.use("/productos", productosRouter);
 app.use("/ventas", ventasRouter);
 app.use("/productosVentas", productosVentasRouter);
+app.use("/auth", authRoutes);
 
 // Ruta por defecto (404)
 app.use((req, res) => {
