@@ -1,73 +1,81 @@
 <!DOCTYPE html>
 
 <html lang="es">
+  <head>
+    <!--CABECERA: incluye Bootstrap, íconos y hoja de estilos personalizada-->
+    <meta charset="utf-8" />
+    <title>Carrito | R.E.P.O.</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link href="./assets/css/styles.css" rel="stylesheet" />
+  </head>
 
-<head>
-  <!--CABECERA: incluye Bootstrap, íconos y hoja de estilos personalizada-->
-  <meta charset="utf-8" />
-  <title>Carrito | R.E.P.O.</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="./assets/css/styles.css" rel="stylesheet" />
-</head>
-
-<body class="bg-light" style="
+  <body
+    class="bg-light"
+    style="
       background: url('./assets/img/fondo_checkout.png') center / cover
         no-repeat;
       min-height: 100vh;
-    ">
-  <!--CUERPO: fondo general claro (bg-light), estructura principal del sitio-->
-  <header class="bg-white shadow-sm position-fixed top-0 start-0 w-100 z-3">
-    <div class="container py-2">
-      <ul class="nav nav-tabs justify-content-between">
-        <li class="nav-item">
-          <a class="nav-link" href="./bienvenida.html">Bienvenida</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="./inicio.html">Inicio</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="./productos.html">Productos</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="./carrito.html">Carrito</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="./ticket.html">Ticket</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-danger" href="./admin/login.html">Admin</a>
-        </li>
-      </ul>
-    </div>
-  </header>
-<main class="container py-5 mt-5">
-  <!-- TÍTULO -->
-  <div class="glass-card p-4 mb-4 text-center">
-    <h1 class="text-center">Tu Carrito</h1>
-  </div>
-
-  <!-- CONTENIDO PRINCIPAL -->
-  <div class="row g-4">
-    <!-- Columna izquierda: productos -->
-    <div class="col-lg-8" id="carritoContainer">
-      <!-- Acá se insertan las cards de productos -->
-    </div>
-
-    <!-- Columna derecha: total -->
-    <div class="col-lg-4">
-      <div class="glass-card p-4 shadow-sm">
-        <h4 class="mb-3">Resumen</h4>
-        <hr>
-        <p class="fs-5 mb-2">Total:</p>
-        <p class="fs-3 fw-bold" id="totalCarrito">$0</p>
-        <button type="button" id="finalizarCompra" class="btn btn-success w-100 mt-3">
-          Finalizar Compra
-        </button>
+    "
+  >
+    <!--CUERPO: fondo general claro (bg-light), estructura principal del sitio-->
+    <header class="bg-white shadow-sm position-fixed top-0 start-0 w-100 z-3">
+      <div class="container py-2">
+        <ul class="nav nav-tabs justify-content-between">
+          <li class="nav-item">
+            <a class="nav-link" href="./bienvenida.html">Bienvenida</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./inicio.html">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./productos.html">Productos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./carrito.html">Carrito</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./ticket.html">Ticket</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-danger" href="./admin.html">Admin</a>
+          </li>
+        </ul>
       </div>
-    </div>
-  </div>
-</main>
-  <script src="./js/carrito.js"></script>
-</body>
+    </header>
+    <main class="container py-5 mt-5">
+      <!-- TÍTULO -->
+      <div class="glass-card p-4 mb-4 text-center">
+        <h1 class="text-center">Tu Carrito</h1>
+      </div>
 
+      <!-- CONTENIDO PRINCIPAL -->
+      <div class="row g-4">
+        <!-- Columna izquierda: productos -->
+        <div class="col-lg-8" id="carritoContainer">
+          <!-- Acá se insertan las cards de productos -->
+        </div>
+
+        <!-- Columna derecha: total -->
+        <div class="col-lg-4">
+          <div class="glass-card p-4 shadow-sm">
+            <h4 class="mb-3">Resumen</h4>
+            <hr />
+            <p class="fs-5 mb-2">Total:</p>
+            <p class="fs-3 fw-bold" id="totalCarrito">$0</p>
+            <button
+              type="button"
+              id="finalizarCompra"
+              class="btn btn-success w-100 mt-3"
+            >
+              Finalizar Compra
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="./js/carrito.js"></script>
+  </body>
 </html>

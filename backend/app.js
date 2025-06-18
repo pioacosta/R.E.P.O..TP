@@ -1,12 +1,18 @@
 const express = require("express");
 const cors = require("cors");
-require("dotenv").config(); // primero cargamos las variables de entorno
+require("dotenv").config();
 
 const app = express();
 app.use(cors());
-app.use(express.json()); // Middleware para JSON
+app.use(express.json());
 
-// Rutas
+// Servir archivos estáticos del frontend
+const path = require("path");
+app.use(express.static(path.join(__dirname, "../frontend")));
+
+app.use("/storage", express.static("storage"));
+
+// Rutas de la API
 const usuariosRouter = require("./routes/usuariosRoutes");
 const categoriaRouter = require("./routes/categoriaRoutes");
 const productosRouter = require("./routes/productosRoutes");
@@ -14,9 +20,6 @@ const ventasRouter = require("./routes/ventasRouter");
 const productosVentasRouter = require("./routes/productosVentasRouter");
 const authRoutes = require("./routes/authRoutes");
 
-app.use("/storage", express.static("storage"));
-
-// Rutas de la API
 app.use("/usuarios", usuariosRouter);
 app.use("/categorias", categoriaRouter);
 app.use("/productos", productosRouter);
@@ -31,9 +34,8 @@ app.use((req, res) => {
 
 // Base de datos
 const sequelize = require("./config/db");
-require("./models"); // Importar modelos
+require("./models");
 
-// Sincronizar DB y luego arrancar el servidor
 const { Categoria } = require("./models");
 
 sequelize.sync({ alter: true }).then(async () => {
