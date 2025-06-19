@@ -5,6 +5,18 @@ const listarProductos = async (req, res) => {
   res.json(productos);
 };
 
+const productospaginados = async (page = 1, limit = 10) =>{
+  const offset = (page -1) * limit; // offset seria decirle a la base de datos desde que registro traer los datos
+
+  const { cotador, rows } = await Producto.findAndCountAll({
+    where: {
+      activo: true  // filtra todos los productos por los que esten activos
+    },
+  })
+
+}
+
+
 const obtenerProductoPorId = async (req, res) => {
   const producto = await Producto.findByPk(req.params.id);
   res.json(producto);

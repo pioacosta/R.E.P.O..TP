@@ -132,16 +132,18 @@ function mostrarAlerta() {
   setTimeout(() => alerta.classList.add("d-none"), 2000);
 }
 
-import { mostrarAlerta, confirmarAccion } from "./ui.js";
+//import { mostrarAlerta, confirmarAccion } from "./ui.js";
 
 function agregarProducto(id) {
-  // lógica de agregar al carrito...
+  
   mostrarAlerta("Producto añadido");
 }
 
 function eliminarProducto(id) {
   confirmarAccion("¿Eliminar este producto?", () => {
-    // lógica...
+    carrito = carrito.filter(p => p.id !== id);
+    localStorage.setItem("carrito", JSON.stringify(carrito));
     mostrarAlerta("Producto eliminado", "danger");
   });
 }
+

@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", async () => {
   const filtroCategoria = document.getElementById("filtroCategoria");
 
@@ -49,46 +50,47 @@ const cargarProductos = async () => {
   return activos;
 };
 
-const agregarCantidad = async (id) => {
-  const input = document.querySelector(`.cantidad-input[data-id="${id}"]`);
-  const raw = input.value.trim();
+// const agregarCantidad = async (id) => {
+//   const input = document.querySelector(`.cantidad-input[data-id="${id}"]`);
+//   const raw = input.value.trim();
+//   const cantidad = parseInt(raw);
+
+//   if (isNaN(cantidad) || cantidad < 1 || cantidad > 100) {
+//     alert("Por favor, ingresá una cantidad válida entre 1 y 100.");
+//     input.focus();
+//     return;
+//   }
+// }
+
+function agregarAlCarrito(id) {
+  const cantidadInput = document.querySelector(`.cantidad-input[data-id="${id}"]`);
+  const raw = cantidadInput?.value.trim();
   const cantidad = parseInt(raw);
 
   if (isNaN(cantidad) || cantidad < 1 || cantidad > 100) {
-    alert("Por favor, ingresá una cantidad válida entre 1 y 100.");
-    input.focus();
+    mostrarAlerta("Cantidad invÃ¡lida. Debe ser entre 1 y 100.", "danger");
     return;
   }
 
-  // Esperamos la lista de productos correctamente
-  const productos = await cargarProductos();
-  const productoSeleccionado = productos.find(p => p.id === id);
-
-  if (!productoSeleccionado) {
-    alert("Producto no encontrado.");
+  const producto = window.todosLosProductos.find(p => p.id === id);
+  if (!producto) {
+    mostrarAlerta("Producto no encontrado", "danger");
     return;
   }
 
-  let carrito = JSON.parse(sessionStorage.getItem("carrito")) || [];
-  const existente = carrito.find((p) => p.id === id);
+  const carrito = JSON.parse(sessionStorage.getItem("carrito")) || [];
+  const existente = carrito.find(p => p.id === id);
 
   if (existente) {
     existente.cantidad += cantidad;
   } else {
-    carrito.push({
-      id: productoSeleccionado.id,
-      nombre: productoSeleccionado.nombre,
-      precio: productoSeleccionado.precio,
-      imagen: productoSeleccionado.imagen,
-      cantidad: cantidad
-    });
-
-    console.log(productoSeleccionado.imagen)
-    console.log(productoSeleccionado)
+    carrito.push({ ...producto, cantidad });
   }
 
   sessionStorage.setItem("carrito", JSON.stringify(carrito));
-};
+  mostrarAlerta(`Agregado: ${producto.nombre} (x${cantidad})`);
+}
+
 
 
 function renderizarProductos(lista) {
@@ -102,7 +104,7 @@ function renderizarProductos(lista) {
   }
 
   lista.forEach((prod) => {
-    console.log(prod.imagen)
+    console.log(prod.imagen);
 
     const col = document.createElement("div");
     col.className = "col-md-4 mb-4";
@@ -119,12 +121,12 @@ function renderizarProductos(lista) {
           <p class="card-text text-muted">${prod.categoria || ""}</p>
           <p class="card-text fw-bold">$ ${prod.precio}</p>
           <div class="input-group mt-auto">
-            <input type="number" min="1" max="100" value="1" class="form-control cantidad-input" data-id="${
-              prod.id
-            }">
-            <button class="btn btn-primary" onclick="agregarCantidad(${
-              prod.id
-            })">Agregar</button>
+ <input type="number" class="cantidad-input" data-id="${
+   prod.id
+ }" value="1" min="1" max="100">
+<button class="btn btn-success" onclick="agregarAlCarrito(${
+      prod.id
+    })">Agregar</button>
           </div>
         </div>
       </div>
