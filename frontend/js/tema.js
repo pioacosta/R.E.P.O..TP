@@ -12,7 +12,7 @@ export function initThemeToggle(btnId = "btnToggleModo") {
     body.classList.toggle("bg-light", !dark);
     body.classList.toggle("text-white", dark);
 
-    // Actualiza el texto e ícono del botón
+    // Actualiza el texto y el icono del botón
     btn.innerHTML = dark
       ? '<i class="bi bi-sun-fill me-1"></i> Modo claro'
       : '<i class="bi bi-moon-fill me-1"></i> Modo oscuro';
@@ -28,4 +28,18 @@ export function initThemeToggle(btnId = "btnToggleModo") {
   btn.addEventListener("click", () =>
     setTheme(!body.classList.contains("bg-dark"))
   );
+}
+
+// Persistencia del tema claro/oscuro
+const temaBtn = document.getElementById("btnTema");
+if (temaBtn) {
+  const temaActual = localStorage.getItem("tema") || "claro";
+  document.body.dataset.tema = temaActual;
+
+  temaBtn.addEventListener("click", () => {
+    const nuevoTema =
+      document.body.dataset.tema === "claro" ? "oscuro" : "claro";
+    document.body.dataset.tema = nuevoTema;
+    localStorage.setItem("tema", nuevoTema);
+  });
 }

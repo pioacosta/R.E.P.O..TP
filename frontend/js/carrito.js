@@ -1,13 +1,3 @@
-const productosPrueba = [
-  {
-    id: 1,
-    nombre: "cepillo 1",
-    precio: 1200,
-    imagen: "assets/img/cepillo.png",
-    cantidad: 1,
-  },
-];
-
 document.addEventListener("DOMContentLoaded", async () => {
   document
     .getElementById("finalizarCompra")
@@ -120,10 +110,9 @@ function calcularTotal(lista) {
   textTotal.innerHTML = `${total}`;
 }
 
-function vaciarCarrito(){
+function vaciarCarrito() {
   sessionStorage.removeItem("carrito");
 }
-
 
 function confirmarCompra() {
   ticket = obtenerCarrito();
@@ -141,4 +130,19 @@ function mostrarAlerta() {
   const alerta = document.getElementById("alertaProducto");
   alerta.classList.remove("d-none");
   setTimeout(() => alerta.classList.add("d-none"), 2000);
+}
+
+// 🔄 Mejora: uso de ui.js para alertas y confirmaciones
+import { mostrarAlerta, confirmarAccion } from "./ui.js";
+
+function agregarProducto(id) {
+  // lógica de agregar al carrito...
+  mostrarAlerta("Producto añadido");
+}
+
+function eliminarProducto(id) {
+  confirmarAccion("¿Eliminar este producto?", () => {
+    // lógica...
+    mostrarAlerta("Producto eliminado", "danger");
+  });
 }
