@@ -132,7 +132,6 @@ function mostrarAlerta() {
   setTimeout(() => alerta.classList.add("d-none"), 2000);
 }
 
-// 🔄 Mejora: uso de ui.js para alertas y confirmaciones
 import { mostrarAlerta, confirmarAccion } from "./ui.js";
 
 function agregarProducto(id) {
