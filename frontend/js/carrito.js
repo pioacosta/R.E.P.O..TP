@@ -1,11 +1,96 @@
+const papa = {
+  id: 1,
+  nombre: "Shampoopo",
+  descripcion: "shampuconcaca",
+  precio: "1400",
+  imagen: "http://localhost:3000/storage/img/Bolsa de champÃº con moscas.png",
+};
+
 document.addEventListener("DOMContentLoaded", async () => {
   document
     .getElementById("finalizarCompra")
-    .addEventListener("click", confirmarCompra);
+    .addEventListener("click", registrarVentas);
 
   const productosCarrito = obtenerCarrito();
   renderizarProductos(productosCarrito);
 });
+
+async function registrarVentas(e) {
+  e.preventDefault();
+
+  const productos = obtenerCarrito();
+
+  if (productos.length === 0) {
+    alert("No hay productos en el carrito.");
+    return;
+  }
+
+  // cantidades
+  productos.forEach((p) => {
+    if (!p.cantidad) p.cantidad = 1;
+  });
+
+  // Calcular el total
+  const total = productos.reduce(
+    (acc, prod) => acc + prod.precio * prod.cantidad,
+    0
+  );
+
+  // Crear la venta
+  const venta = {
+    cliente_nombre: sessionStorage.getItem("nombreUsuario") || "Invitado",
+    total: total,
+    fecha: new Date().toISOString().split("T")[0], // en formato año-mes-dia
+  };
+
+  try {
+    const respuesta = await fetch("http://localhost:3000/ventas", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(venta),
+    });
+
+    if (!respuesta.ok) throw new Error("No se pudo registrar la venta.");
+
+    const data = await respuesta.json();
+    const ventaId = data.venta_id; //esto es el ID de la venta
+
+    console.log("Venta guardada:", data);
+
+    // Crear cada productoVenta por cada producto guardado en sessionStorage de carrito
+    for (const prod of productos) {
+      const productoVenta = {
+        venta_id: ventaId,
+        producto_id: prod.id,
+        cantidad: prod.cantidad,
+        precio_unitario: prod.precio,
+      };
+
+      await fetch("http://localhost:3000/productosVentas", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(productoVenta),
+      });
+    }
+
+    // al finalizar limpia el carro y te redirije al ticket
+    confirmarCompra();
+  } catch (error) {
+    console.error("Error al crear la venta:", error);
+  }
+}
+
+
+async function finalizarCompra() {
+  const compra = obtenerCarrito();
+  console.log(compra);
+
+  console.log(nombre);
+}
 
 function guardarCarrito(carrito) {
   sessionStorage.setItem("carrito", JSON.stringify(carrito));
@@ -132,18 +217,14 @@ function mostrarAlerta() {
   setTimeout(() => alerta.classList.add("d-none"), 2000);
 }
 
-//import { mostrarAlerta, confirmarAccion } from "./ui.js";
-
 function agregarProducto(id) {
-  
   mostrarAlerta("Producto añadido");
 }
 
 function eliminarProducto(id) {
   confirmarAccion("¿Eliminar este producto?", () => {
-    carrito = carrito.filter(p => p.id !== id);
+    carrito = carrito.filter((p) => p.id !== id);
     localStorage.setItem("carrito", JSON.stringify(carrito));
     mostrarAlerta("Producto eliminado", "danger");
   });
 }
-

@@ -13,11 +13,11 @@ const obtenerVentaPorId = async (req, res) => {
 const crearVenta = async (req, res) => {
   try {
     const ventaNueva = await Venta.create({
-      usuario_id: req.body.usuario_id,
+      cliente_nombre: req.body.cliente_nombre,
       total: req.body.total,
       fecha: req.body.fecha,
     });
-    res.status(201).json(ventaNueva);
+    res.status(201).json({ venta_id: ventaNueva.id});
   } catch (error) {
     res.status(500).json({ mensaje: "Error al crear la venta", error });
   }
@@ -30,7 +30,7 @@ const modificarVenta = async (req, res) => {
       return res.status(404).json({ mensaje: "Venta no encontrada" });
     }
     await venta.update({
-      usuario_id: req.body.usuario_id,
+      cliente_nombre: req.body.cliente_nombre,
       total: req.body.total,
       fecha: req.body.fecha,
     });

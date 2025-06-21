@@ -3,3 +3,4 @@ backend/.env
 .vscode
 Trabajo Práctico - PROGRAMACIÓN 3.pdf
 backend/crearAdmin.js
+backend/storage/img
