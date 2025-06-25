@@ -26,6 +26,10 @@ const Producto = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    stock:{
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
     categoria_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
