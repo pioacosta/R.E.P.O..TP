@@ -34,6 +34,7 @@ const crearProducto = async (req, res) => {
       precio: req.body.precio,
       imagen: imgURL, // nombre del archivo subido
       categoria_id: req.body.categoria_id,
+      stock: req.body.stock
     });
 
     res.status(201).json({
