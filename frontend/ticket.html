@@ -38,7 +38,7 @@
         </ul>
       </div>
     </header>
-    <main class="container py-5 mt-5">
+    <main class="container py-5 mt-5" >
       <h1 class="text-center text-primary mb-4 fw-bold">Ticket de compra</h1>
       <div
         class="card shadow-lg p-4 rounded-4"
@@ -46,7 +46,7 @@
           background: rgba(255, 255, 255, 0.85);
           backdrop-filter: blur(10px);
         "
-      >
+      id = "ticket">
         <p class="mb-2 fs-5">
           <strong> Cliente:</strong> <span id="clienteNombre">Juan Pérez</span>
         </p>
@@ -81,6 +81,11 @@
       </div>
 
       <div class="text-center mt-4">
+        <div class="text-center mt-4">
+            <button id="downloadPdfBtn" class="btn btn-outline-light px-4 py-2 rounded-pill shadow-sm">
+                <i class="fas fa-file-pdf me-2 text-danger"></i> Descargar Ticket en PDF
+            </button>
+        </div>
         <button
           class="btn btn-danger px-4 py-2 rounded-3"
           onclick="reiniciar()"
@@ -95,7 +100,10 @@
         window.location.href = "./inicio.html";
       }
     </script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="./js/ticket.js"></script>
+
+
   </body>
 </html>
