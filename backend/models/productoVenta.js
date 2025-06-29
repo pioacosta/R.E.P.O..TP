@@ -1,5 +1,6 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/db");
+const Producto = require("./producto");
 
 const ProductoVenta = sequelize.define(
   "productoVenta",
@@ -32,5 +33,15 @@ const ProductoVenta = sequelize.define(
     timestamps: false,
   }
 );
-
+ProductoVenta.afterCreate(async (productoVenta, options) => {
+  try {
+    const producto = await Producto.findByPk(productoVenta.producto_id);
+    if (producto) {
+      producto.stock -= productoVenta.cantidad;
+      await producto.save();
+    }
+  } catch (error) {
+    console.error("Error al actualizar el stock:", error);
+  }
+});
 module.exports = ProductoVenta;

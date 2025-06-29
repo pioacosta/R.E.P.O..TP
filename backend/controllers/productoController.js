@@ -92,7 +92,7 @@ const darDeBajaProducto = async (req, res) => {
     if (!producto) {
       return res.status(404).json({ mensaje: "Producto no encontrado" });
     }
-    producto.activo = false;
+    producto.activo = !producto.activo;
     await producto.save();
     res.json({ mensaje: "Producto dado de baja correctamente", producto });
   } catch (error) {
