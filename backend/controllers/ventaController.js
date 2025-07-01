@@ -1,5 +1,7 @@
 const Venta = require("../models/venta");
-
+const ProductoVenta = require("../models/productoVenta");
+const Producto = require("../models/producto");
+const sequelize = require("../config/db");
 const listarVentas = async (req, res) => {
   const ventas = await Venta.findAll();
   res.json(ventas);
@@ -11,15 +13,60 @@ const obtenerVentaPorId = async (req, res) => {
 };
 
 const crearVenta = async (req, res) => {
+  const { cliente_nombre, productos } = req.body;
+  // productos = [{ producto_id, cantidad }]
+
+  const t = await sequelize.transaction();
+
   try {
-    const ventaNueva = await Venta.create({
-      cliente_nombre: req.body.cliente_nombre,
-      total: req.body.total,
-      fecha: req.body.fecha,
-    });
-    res.status(201).json({ venta_id: ventaNueva.id});
+    const venta = await Venta.create(
+      { cliente_nombre, fecha: new Date(), total: 0 },
+      { transaction: t }
+    );
+
+    let totalVenta = 0;
+
+    for (const item of productos) {
+      const producto = await Producto.findByPk(item.producto_id, { transaction: t });
+
+      if (!producto) {
+        throw { code: 400, message: `Producto con ID ${item.producto_id} no encontrado.` };
+      }
+
+      if (producto.stock < item.cantidad) {
+        throw { code: 400, message: `Stock insuficiente para el producto "${producto.nombre}".` };
+      }
+
+      await ProductoVenta.create(
+        {
+          producto_id: producto.id,
+          venta_id: venta.id,
+          cantidad: item.cantidad,
+          precio_unitario: producto.precio,
+        },
+        { transaction: t }
+      );
+
+      producto.stock -= item.cantidad;
+      await producto.save({ transaction: t });
+
+      totalVenta += item.cantidad * producto.precio;
+    }
+
+    venta.total = totalVenta;
+    await venta.save({ transaction: t });
+
+    await t.commit();
+
+    res.status(201).json({ success: true, venta_id: venta.id });
   } catch (error) {
-    res.status(500).json({ mensaje: "Error al crear la venta", error });
+    await t.rollback();
+
+    const statusCode = error.code || 500;
+    const mensaje = error.message || "Error inesperado al procesar la venta.";
+
+    console.error(error);
+    res.status(statusCode).json({ success: false, mensaje });
   }
 };
 
