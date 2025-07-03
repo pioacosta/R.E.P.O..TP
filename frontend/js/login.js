@@ -34,7 +34,6 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem("adminToken", data.token);
         const username = data.nombre ?? email.split("@")[0];
         sessionStorage.setItem("usuario", username);
-        window.location.href = "inicio.html";
         document.getElementById("login-section").style.display = "none";
         if (productForm) productForm.style.display = "block";
         if (logoutBtn) logoutBtn.classList.remove("d-none");
@@ -50,6 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 window.logoutAdmin = function () {
-  localStorage.removeItem("adminToken");
-  location.reload();
+  localStorage.clear(); // elimina token y cualquier otra clave
+  sessionStorage.clear(); // borra nombreUsuario, etc.
+  location.href = "./inicio.html";
 };

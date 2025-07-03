@@ -106,3 +106,21 @@ button:hover,
 .producto {
   animation: aparecerDesdeAbajo 0.5s ease forwards;
 }
+
+/* --- Botón cerrar sesión fijo --- */
+.logout-fixed {
+  position: fixed !important;
+  top: 1rem !important;
+  right: 1rem !important;
+  z-index: 1050;
+  padding-inline: 1.25rem;
+  border-radius: 2rem;
+  background-color: #dc3545;
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.logout-fixed:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+}
