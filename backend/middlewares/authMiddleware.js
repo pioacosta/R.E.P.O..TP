@@ -12,11 +12,13 @@ const verificarToken = (req, res, next) => {
   });
 };
 
-const soloAdmin = (req, res, next) => {
-  if (req.user.rol !== "admin") {
-    return res.status(403).json({ mensaje: "Solo administradores" });
-  }
-  next();
+const permitirRoles = (...rolesPermitidos) => {
+  return (req, res, next) => {
+    if (!rolesPermitidos.includes(req.user.rol)) {
+      return res.status(403).json({ mensaje: "No tenés permisos" });
+    }
+    next();
+  };
 };
 
-module.exports = { verificarToken, soloAdmin };
+module.exports = { verificarToken, permitirRoles };

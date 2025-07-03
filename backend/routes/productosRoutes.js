@@ -7,6 +7,8 @@ const manejarErroresValidacion = require("../middlewares/manejarErroresValidacio
 
 const productoControllers = require("../controllers/productoController");
 
+const { verificarToken, permitirRoles } = require("../middlewares/authMiddleware");
+
 // Listar productos
 router.get("/", productoControllers.listarProductos);
 
@@ -16,6 +18,7 @@ router.get("/:id", productoControllers.obtenerProductoPorId);
 // Crear un producto con validación y subida de imagen
 router.post(
   "/crear",
+  verificarToken, permitirRoles("root"),
   upload.single("imagen"),
   validarProducto,
   manejarErroresValidacion,
