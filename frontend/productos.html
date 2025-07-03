@@ -13,7 +13,6 @@
     <link href="./assets/css/styles.css" rel="stylesheet" />
 
     <style>
-      /* Frosted glass helper */
       .glass-card {
         background: rgba(255, 255, 255, 0.8);
         backdrop-filter: blur(8px);
@@ -25,7 +24,7 @@
         background: rgba(255, 255, 255, 0.9);
         backdrop-filter: blur(4px);
       }
-      /* Título con luz */
+
       .text-glow {
         color: #fff;
         text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
@@ -64,9 +63,6 @@
               <a class="nav-link" href="./carrito.html">Carrito</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="./ticket.html">Ticket</a>
-            </li>
-            <li class="nav-item">
               <a class="nav-link text-danger" href="./inicio.html"
                 >Cancelar compra</a
               >
@@ -77,10 +73,12 @@
     </nav>
 
     <!-- MAIN -->
-    <main class="container flex-grow-1 pt-5">
-      <h1 class="text-center my-4 text-glow text-black">
-        Productos disponibles
-      </h1>
+    <main class="container flex-grow-1" style="padding-top: 7rem">
+      <div class="glass-card p-4 mb-4 mx-auto" style="max-width: 500px">
+        <h1 class="display-6 fw-bold mb-0 text-dark text-center">
+          Productos disponibles
+        </h1>
+      </div>
 
       <!-- FILTROS -->
       <div class="glass-card p-3 p-md-4 mb-4">

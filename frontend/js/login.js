@@ -53,3 +53,8 @@ window.logoutAdmin = function () {
   sessionStorage.clear(); // borra nombreUsuario, etc.
   location.href = "./inicio.html";
 };
+
+// Función para salir del login admin
+function salirAdmin() {
+  window.location.href = "./inicio.html";
+}
