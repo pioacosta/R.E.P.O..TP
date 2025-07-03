@@ -107,9 +107,9 @@ function renderizarProductos(lista) {
             <p class="card-text text-muted mb-1 text-center text-sm-start">${
               prod.categoria || ""
             }</p>
-            <p class="card-text fw-bold mb-3 text-center text-sm-start">$ ${
+            <p class="card-text fw-bold mb-3 text-center text-sm-start">$ ${parseFloat(
               prod.precio
-            }</p>
+            ).toFixed(2)}</p>
 
             <!-- Controles -->
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-sm-start gap-2">

@@ -72,6 +72,18 @@
         color: #721c24;
         border: 1px solid #f5c6cb;
       }
+
+      /* Ocultar las flechitas nativas de los inputs de número */
+      .cantidad-input::-webkit-outer-spin-button,
+      .cantidad-input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      .cantidad-input[type="number"] {
+        -moz-appearance: textfield;
+        appearance: textfield;
+      }
     </style>
   </head>
 

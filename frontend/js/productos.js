@@ -165,7 +165,9 @@ function renderizarProductos(lista) {
         <div class="card-body d-flex flex-column">
           <h5 class="card-title">${prod.nombre}</h5>
           <p class="card-text text-muted">${prod.categoria || ""}</p>
-          <p class="card-text fw-bold">$ ${prod.precio}</p>
+          <p class="card-text fw-bold">$ ${parseFloat(prod.precio).toFixed(
+            2
+          )}</p>
           <div class="input-group mt-auto">
             <input type="number" class="cantidad-input" data-id="${
               prod.id
