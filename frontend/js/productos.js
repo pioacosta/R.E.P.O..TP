@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", async () => {
   const filtroCategoria = document.getElementById("filtroCategoria");
 
@@ -36,6 +35,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       .getElementById("buscador")
       .addEventListener("input", aplicarFiltros);
     filtroCategoria.addEventListener("change", aplicarFiltros);
+    document
+      .getElementById("filtroPrecio")
+      .addEventListener("change", aplicarFiltros);
   } catch (error) {
     console.error("Error al cargar datos:", error);
     document.getElementById("productosContainer").innerHTML =
@@ -63,7 +65,9 @@ const cargarProductos = async () => {
 // }
 
 function agregarAlCarrito(id) {
-  const cantidadInput = document.querySelector(`.cantidad-input[data-id="${id}"]`);
+  const cantidadInput = document.querySelector(
+    `.cantidad-input[data-id="${id}"]`
+  );
   const raw = cantidadInput?.value.trim();
   const cantidad = parseInt(raw);
 
@@ -72,14 +76,14 @@ function agregarAlCarrito(id) {
     return;
   }
 
-  const producto = window.todosLosProductos.find(p => p.id === id);
+  const producto = window.todosLosProductos.find((p) => p.id === id);
   if (!producto) {
     mostrarAlerta("Producto no encontrado", "danger");
     return;
   }
 
   const carrito = JSON.parse(sessionStorage.getItem("carrito")) || [];
-  const existente = carrito.find(p => p.id === id);
+  const existente = carrito.find((p) => p.id === id);
 
   if (existente) {
     existente.cantidad += cantidad;
@@ -90,8 +94,6 @@ function agregarAlCarrito(id) {
   sessionStorage.setItem("carrito", JSON.stringify(carrito));
   mostrarAlerta(`Agregado: ${producto.nombre} (x${cantidad})`);
 }
-
-
 
 function renderizarProductos(lista) {
   const contenedor = document.getElementById("productosContainer");
@@ -138,12 +140,20 @@ function renderizarProductos(lista) {
 function aplicarFiltros() {
   const texto = document.getElementById("buscador").value.toLowerCase();
   const categoria = document.getElementById("filtroCategoria").value;
+  const precio = document.getElementById("filtroPrecio").value;
 
-  const filtrados = window.todosLosProductos.filter((p) => {
+  let filtrados = window.todosLosProductos.filter((p) => {
     const coincideNombre = p.nombre.toLowerCase().includes(texto);
     const coincideCategoria = categoria === "" || p.categoria === categoria;
     return coincideNombre && coincideCategoria;
   });
+
+  // Ordenar por precio si se seleccionó una opción
+  if (precio === "asc") {
+    filtrados.sort((a, b) => parseFloat(a.precio) - parseFloat(b.precio));
+  } else if (precio === "desc") {
+    filtrados.sort((a, b) => parseFloat(b.precio) - parseFloat(a.precio));
+  }
 
   renderizarProductos(filtrados);
 }
