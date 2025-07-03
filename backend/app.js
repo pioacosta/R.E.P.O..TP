@@ -26,7 +26,7 @@ app.use("/productos", productosRouter);
 app.use("/ventas", ventasRouter);
 app.use("/productosVentas", productosVentasRouter);
 app.use("/auth", authRoutes);
-
+app.use('/img', express.static('storage/img'));
 // Ruta por defecto (404)
 app.use((req, res) => {
   res.status(404).send("Página no encontrada");

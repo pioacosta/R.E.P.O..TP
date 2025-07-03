@@ -18,7 +18,7 @@ router.get("/:id", productoControllers.obtenerProductoPorId);
 // Crear un producto con validación y subida de imagen
 router.post(
   "/crear",
-  verificarToken, permitirRoles("root"),
+  verificarToken, permitirRoles("root", "admin"),
   upload.single("imagen"),
   validarProducto,
   manejarErroresValidacion,
