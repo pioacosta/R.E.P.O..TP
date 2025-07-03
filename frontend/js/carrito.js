@@ -24,23 +24,16 @@ async function registrarVentas(e) {
     alert("No hay productos en el carrito.");
     return;
   }
+  const confirmar = confirm("¿Confirmás que querés finalizar la compra?");
+  if (!confirmar) return;
+  const productosParaEnviar = productos.map((p) => ({
+    producto_id: p.id,
+    cantidad: p.cantidad || 1,
+  }));
 
-  // cantidades
-  productos.forEach((p) => {
-    if (!p.cantidad) p.cantidad = 1;
-  });
-
-  // Calcular el total
-  const total = productos.reduce(
-    (acc, prod) => acc + prod.precio * prod.cantidad,
-    0
-  );
-
-  // Crear la venta
   const venta = {
-    cliente_nombre: sessionStorage.getItem("nombreUsuario") || "Invitado",
-    total: total,
-    fecha: new Date().toISOString().split("T")[0], // en formato año-mes-dia
+    cliente_nombre: sessionStorage.getItem("nombreUsuario"),
+    productos: productosParaEnviar,
   };
 
   try {
@@ -55,35 +48,13 @@ async function registrarVentas(e) {
     if (!respuesta.ok) throw new Error("No se pudo registrar la venta.");
 
     const data = await respuesta.json();
-    const ventaId = data.venta_id; //esto es el ID de la venta
-
     console.log("Venta guardada:", data);
 
-    // Crear cada productoVenta por cada producto guardado en sessionStorage de carrito
-    for (const prod of productos) {
-      const productoVenta = {
-        venta_id: ventaId,
-        producto_id: prod.id,
-        cantidad: prod.cantidad,
-        precio_unitario: prod.precio,
-      };
-
-      await fetch("http://localhost:3000/productosVentas", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(productoVenta),
-      });
-    }
-
-    // al finalizar limpia el carro y te redirije al ticket
     confirmarCompra();
   } catch (error) {
-    console.error("Error al crear la venta:", error);
+    console.log("Error al crear la venta:", error);
   }
 }
-
 
 async function finalizarCompra() {
   const compra = obtenerCarrito();
