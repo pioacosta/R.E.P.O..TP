@@ -1,11 +1,21 @@
 // Función para guardar el nombre
-function guardarNombre(event) {
+async function guardarNombre(event) {
   event.preventDefault();
   const nombre = document.getElementById("inputNombre").value.trim();
-  if (nombre) {
-    sessionStorage.setItem("nombreUsuario", nombre);
-    window.location.href = "./productos.html";
-  }
+  if (!nombre) return;
+
+  sessionStorage.setItem("nombreUsuario", nombre);
+
+  await Swal.fire({
+    title: `¡Bienvenido, ${nombre}!`,
+    showClass: { popup: "animate__animated animate__fadeInDown" },
+    hideClass: { popup: "animate__animated animate__fadeOutUp" },
+    timer: 2500,
+    timerProgressBar: true,
+    icon: "success",
+  });
+
+  window.location.href = "./productos.html";
 }
 
 // Bloquea navegación si no hay nombre

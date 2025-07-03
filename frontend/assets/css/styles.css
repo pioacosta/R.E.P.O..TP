@@ -67,3 +67,42 @@ body.productos-page {
   background: url("../img/fondo_principal.png") no-repeat center center fixed;
   background-size: cover;
 }
+
+button,
+.btn,
+.card,
+.producto {
+  transition: all 0.3s ease;
+}
+
+button:hover,
+.btn:hover,
+.card:hover,
+.producto:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.glass-button {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  border-radius: 12px;
+  padding: 10px 20px;
+}
+
+@keyframes aparecerDesdeAbajo {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.producto {
+  animation: aparecerDesdeAbajo 0.5s ease forwards;
+}

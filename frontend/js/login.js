@@ -32,6 +32,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const data = await res.json();
       if (res.ok && data.token) {
         localStorage.setItem("adminToken", data.token);
+        const username = data.nombre ?? email.split("@")[0];
+        sessionStorage.setItem("usuario", username);
+        window.location.href = "inicio.html";
         document.getElementById("login-section").style.display = "none";
         if (productForm) productForm.style.display = "block";
         if (logoutBtn) logoutBtn.classList.remove("d-none");
