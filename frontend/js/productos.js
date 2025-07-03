@@ -52,18 +52,6 @@ const cargarProductos = async () => {
   return activos;
 };
 
-// const agregarCantidad = async (id) => {
-//   const input = document.querySelector(`.cantidad-input[data-id="${id}"]`);
-//   const raw = input.value.trim();
-//   const cantidad = parseInt(raw);
-
-//   if (isNaN(cantidad) || cantidad < 1 || cantidad > 100) {
-//     alert("Por favor, ingresá una cantidad válida entre 1 y 100.");
-//     input.focus();
-//     return;
-//   }
-// }
-
 function agregarAlCarrito(id) {
   const cantidadInput = document.querySelector(
     `.cantidad-input[data-id="${id}"]`
@@ -72,7 +60,7 @@ function agregarAlCarrito(id) {
   const cantidad = parseInt(raw);
 
   if (isNaN(cantidad) || cantidad < 1 || cantidad > 100) {
-    mostrarAlerta("Cantidad invÃ¡lida. Debe ser entre 1 y 100.", "danger");
+    mostrarAlerta("Cantidad inválida. Debe ser entre 1 y 100.", "danger");
     return;
   }
 

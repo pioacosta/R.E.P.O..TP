@@ -1,19 +1,26 @@
 document.addEventListener("DOMContentLoaded", () => {
   const loginForm = document.getElementById("loginForm");
-  const logoutBtn = document.getElementById("logoutBtn");
-  const productForm = document.getElementById("productForm");
-
   const token = localStorage.getItem("adminToken");
 
-  if (!token) {
-    if (productForm) productForm.style.display = "none";
-    if (logoutBtn) logoutBtn.classList.add("d-none");
-  } else {
-    if (loginForm)
-      document.getElementById("login-section").style.display = "none";
-    if (productForm) productForm.style.display = "block";
-    if (logoutBtn) logoutBtn.classList.remove("d-none");
+  // Función para manejar la UI
+  function toggleAdminUI(isLoggedIn) {
+    const loginSection = document.getElementById("login-section");
+    const productForm = document.getElementById("productForm");
+    const logoutBtn = document.getElementById("logoutBtn");
+
+    if (isLoggedIn) {
+      if (loginSection) loginSection.style.display = "none";
+      if (productForm) productForm.style.display = "block";
+      if (logoutBtn) logoutBtn.classList.remove("d-none");
+    } else {
+      if (loginSection) loginSection.style.display = "block";
+      if (productForm) productForm.style.display = "none";
+      if (logoutBtn) logoutBtn.classList.add("d-none");
+    }
   }
+
+  // Estado inicial
+  toggleAdminUI(!!token);
 
   if (!loginForm) return;
 
@@ -22,21 +29,23 @@ document.addEventListener("DOMContentLoaded", () => {
     const email = document.getElementById("loginEmail").value;
     const password = document.getElementById("loginPassword").value;
     const errorDiv = document.getElementById("loginError");
+
     errorDiv.style.display = "none";
+
     try {
       const res = await fetch("http://localhost:3000/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
+
       const data = await res.json();
+
       if (res.ok && data.token) {
         localStorage.setItem("adminToken", data.token);
         const username = data.nombre ?? email.split("@")[0];
         sessionStorage.setItem("usuario", username);
-        document.getElementById("login-section").style.display = "none";
-        if (productForm) productForm.style.display = "block";
-        if (logoutBtn) logoutBtn.classList.remove("d-none");
+        toggleAdminUI(true);
       } else {
         errorDiv.textContent = data.mensaje || "Login incorrecto";
         errorDiv.style.display = "block";
@@ -49,12 +58,11 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 window.logoutAdmin = function () {
-  localStorage.clear(); // elimina token y cualquier otra clave
-  sessionStorage.clear(); // borra nombreUsuario, etc.
+  localStorage.clear();
+  sessionStorage.clear();
   location.href = "./inicio.html";
 };
 
-// Función para salir del login admin
 function salirAdmin() {
   window.location.href = "./inicio.html";
 }
