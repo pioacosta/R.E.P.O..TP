@@ -45,13 +45,13 @@ function mostrarTicket() {
 
     const fila = document.createElement("tr");
     fila.innerHTML = `
-      <td>${prod.nombre}</td>
-      <td>${prod.cantidad}</td>
-      <td>$${prod.precio}</td>
-      <td>$${subtotal}</td>
+      <td class="text-break">${prod.nombre}</td>
+      <td class="text-center">${prod.cantidad}</td>
+      <td class="text-center text-nowrap">$${prod.precio.toLocaleString()}</td>
+      <td class="text-center text-nowrap fw-bold">$${subtotal.toLocaleString()}</td>
     `;
     tabla.appendChild(fila);
   });
 
-  totalCompra.textContent = total;
+  totalCompra.textContent = total.toLocaleString();
 }
