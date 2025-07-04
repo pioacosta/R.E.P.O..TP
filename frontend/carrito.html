@@ -11,38 +11,10 @@
       rel="stylesheet"
     />
     <link href="./assets/css/styles.css" rel="stylesheet" />
-
-    <style>
-      .glass-card {
-        background: rgba(255, 255, 255, 0.8);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-        border-radius: 1rem;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-      }
-
-      /* Ocultar las flechitas nativas de los inputs de número */
-      .cantidad-input::-webkit-outer-spin-button,
-      .cantidad-input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-      }
-
-      .cantidad-input[type="number"] {
-        -moz-appearance: textfield;
-        appearance: textfield;
-      }
-    </style>
   </head>
 
-  <body
-    class="bg-light"
-    style="
-      background: url('./assets/img/fondo_checkout.png') center / cover
-        no-repeat;
-      min-height: 100vh;
-    "
-  >
+  <body class="bg-light carrito-page">
+    >
     <!-- NAVBAR -->
     <nav class="navbar navbar-expand-md bg-white shadow-sm fixed-top">
       <div class="container">
@@ -75,9 +47,9 @@
         </div>
       </div>
     </nav>
-    <main class="container flex-grow-1" style="padding-top: 7rem">
+    <main class="container flex-grow-1 padding-top-7rem">
       <!-- TÍTULO -->
-      <div class="glass-card p-4 mb-4 mx-auto" style="max-width: 500px">
+      <div class="glass-card p-4 mb-4 mx-auto max-width-500">
         <h1 class="display-6 fw-bold mb-0 text-dark text-center">Tu Carrito</h1>
       </div>
 

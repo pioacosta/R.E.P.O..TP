@@ -86,21 +86,21 @@ function renderizarProductos(lista) {
 
   lista.forEach((prod) => {
     const fila = document.createElement("div");
-    fila.className = "mb-3";
+    fila.className = "mb-3 carrito-item";
 
     fila.innerHTML = `
       <div class="card shadow-sm">
         <div class="row g-0 align-items-center">
           <!-- Imagen del producto -->
-          <div class="col-12 col-sm-4 text-center p-3 border-end">
+          <div class="col-12 col-sm-3 col-md-4 text-center p-2 p-sm-3 border-end">
             <img src="${prod.imagen}" 
                  class="img-fluid object-fit-contain mx-auto" 
-                 style="max-height: 120px;" 
+                 style="max-height: 80px;" 
                  alt="${prod.nombre}">
           </div>
 
           <!-- Detalles del producto -->
-          <div class="col-12 col-sm-8 p-3">
+          <div class="col-12 col-sm-9 col-md-8 p-2 p-sm-3">
             <h5 class="card-title mb-1 text-center text-sm-start">${
               prod.nombre
             }</h5>

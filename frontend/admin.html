@@ -14,17 +14,20 @@
       rel="stylesheet"
     />
     <!-- Hoja personalizada — DESPUÉS de Bootstrap -->
-    <link href="./assets/css/admin.css" rel="stylesheet" />
+    <link href="./assets/css/styles.css" rel="stylesheet" />
+    <style>
+      /* Forzar el fondo de admin */
+      body.admin-page {
+        background: url("./assets/img/fondo_admin.png") center/cover no-repeat !important;
+        background-attachment: fixed !important;
+        min-height: 100vh !important;
+        background-color: #f8f9fa !important; /* Fallback color */
+      }
+    </style>
     <title>Dashboard</title>
   </head>
 
-  <body
-    class="bg-light"
-    style="
-      background: url('./assets/img/admin.png') center / cover no-repeat;
-      min-height: 100vh;
-    "
-  >
+  <body class="admin-page">
     <div class="container py-5">
       <div class="row justify-content-center">
         <!-- Login de admin -->

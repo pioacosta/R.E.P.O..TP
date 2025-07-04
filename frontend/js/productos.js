@@ -153,7 +153,8 @@ function renderizarProductos(lista) {
     console.log(prod.imagen);
 
     const col = document.createElement("div");
-    col.className = "col-md-4 mb-4 producto-card-container";
+    col.className =
+      "col-6 col-sm-4 col-md-3 col-lg-4 col-xl-3 mb-4 producto-card-container";
 
     col.innerHTML = `
       <div class="card h-100 shadow-sm d-flex flex-column position-relative">
