@@ -45,7 +45,9 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem("adminToken", data.token);
         const username = data.nombre ?? email.split("@")[0];
         sessionStorage.setItem("usuario", username);
+        sessionStorage.setItem("rol", data.rol);
         toggleAdminUI(true);
+        window.location.href = "./dashboard.html";
       } else {
         errorDiv.textContent = data.mensaje || "Login incorrecto";
         errorDiv.style.display = "block";

@@ -1,6 +1,6 @@
 (() => {
   const isAdmin = () => !!localStorage.getItem("adminToken");
-  const isAdminPage = window.location.pathname.endsWith("admin.html");
+  const isAdminPage = window.location.pathname.endsWith("dashboard.html");
   const hasCustomer = () => !!sessionStorage.getItem("nombreUsuario");
 
   document.addEventListener("DOMContentLoaded", () => {
