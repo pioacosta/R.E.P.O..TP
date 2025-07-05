@@ -6,7 +6,7 @@ const { verificarToken, permitirRoles } = require("../middlewares/authMiddleware
 router.get("/", usuarioController.listarUsuarios);
 router.get("/:id", usuarioController.obtenerUsuarioPorId);
 router.post("/", verificarToken, permitirRoles("root"), usuarioController.crearUsuario);
-router.put("/:id", usuarioController.modificarUsuario);
-router.delete("/:id", usuarioController.eliminarUsuario);
+router.put("/:id",verificarToken, permitirRoles("root"), usuarioController.modificarUsuario);
+router.delete("/:id",verificarToken, permitirRoles("root"), usuarioController.eliminarUsuario);
 
 module.exports = router;

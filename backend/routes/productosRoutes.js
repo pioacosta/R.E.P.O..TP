@@ -29,6 +29,7 @@ router.post(
 router.put(
   "/:id",
   upload.single("imagen"),
+  verificarToken, permitirRoles("root", "admin"),
   validarProducto,
   manejarErroresValidacion,
   productoControllers.modificarProducto
@@ -38,7 +39,7 @@ router.put(
 router.delete("/:id", productoControllers.eliminarProducto);
 
 // Baja lógica
-router.patch("/:id/baja", productoControllers.darDeBajaProducto);
+router.patch("/:id/baja",verificarToken, permitirRoles("root","admin"), productoControllers.darDeBajaProducto);
 
 // Alta lógica
 router.patch("/:id/alta", productoControllers.darDeAltaProducto);
