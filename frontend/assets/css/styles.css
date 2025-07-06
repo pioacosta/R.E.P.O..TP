@@ -1148,3 +1148,34 @@ body.dark-mode .carrito-item:hover {
     background: rgba(20, 20, 20, 0.9);
   }
 }
+
+/* === ESTILOS PARA LOGOS EN NAVBAR === */
+.navbar-brand img {
+  transition: opacity 0.3s ease-in-out;
+  object-fit: contain;
+}
+
+/* Asegurar que los logos mantengan proporción */
+#logoClaro,
+#logoOscuro {
+  max-height: 50px;
+  width: auto;
+}
+
+/* En modo oscuro, cambiar el logo automáticamente */
+body.dark-mode .navbar {
+  background: rgba(30, 30, 30, 0.95);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive para logos en dispositivos móviles */
+@media (max-width: 576px) {
+  #logoClaro,
+  #logoOscuro {
+    max-height: 50px;
+  }
+
+  .navbar-brand {
+    font-size: 1rem;
+  }
+}

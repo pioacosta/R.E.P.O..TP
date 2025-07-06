@@ -12,6 +12,8 @@ function aplicarModoOscuro(activar) {
     document.body.classList.remove("dark-mode");
     localStorage.setItem("darkMode", "disabled");
   }
+  // Actualizar logo según el tema
+  actualizarLogo();
 }
 
 // Función para alternar entre modo oscuro y claro
@@ -39,6 +41,24 @@ function actualizarIconoToggle() {
   }
 }
 
+// Función para actualizar el logo según el tema
+function actualizarLogo() {
+  const logoClaro = document.getElementById("logoClaro");
+  const logoOscuro = document.getElementById("logoOscuro");
+
+  if (!logoClaro || !logoOscuro) return;
+
+  const esModoOscuro = document.body.classList.contains("dark-mode");
+
+  if (esModoOscuro) {
+    logoClaro.classList.add("d-none");
+    logoOscuro.classList.remove("d-none");
+  } else {
+    logoClaro.classList.remove("d-none");
+    logoOscuro.classList.add("d-none");
+  }
+}
+
 // Función para inicializar el modo oscuro al cargar la página
 function inicializarModoOscuro() {
   // Verificar la preferencia guardada
@@ -51,8 +71,9 @@ function inicializarModoOscuro() {
     aplicarModoOscuro(false);
   }
 
-  // Actualizar iconos
+  // Actualizar iconos y logo
   actualizarIconoToggle();
+  actualizarLogo();
 
   // Agregar event listener al botón toggle
   const toggleBtn = document.getElementById("darkModeToggle");

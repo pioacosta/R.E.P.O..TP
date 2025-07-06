@@ -29,7 +29,55 @@
   </head>
 
   <body class="admin-page">
-    <div class="container py-5">
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-md bg-white shadow-sm fixed-top">
+      <div class="container">
+        <a class="navbar-brand fw-bold d-flex align-items-center">
+          <img
+            id="logoClaro"
+            src="./assets/img/logo_tema_claro.png"
+            alt="R.E.P.O. Logo"
+            height="50"
+            class="me-2"
+          />
+          <img
+            id="logoOscuro"
+            src="./assets/img/logo_tema_oscuro.png"
+            alt="R.E.P.O. Logo"
+            height="50"
+            class="me-2 d-none"
+          />
+          R.E.P.O.
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#mainNav"
+          aria-controls="mainNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainNav">
+          <ul class="navbar-nav ms-auto gap-md-2"></ul>
+
+          <!-- Toggle de modo oscuro -->
+          <button
+            id="darkModeToggle"
+            class="btn btn-outline-secondary btn-sm ms-3"
+            type="button"
+            title="Cambiar tema"
+          >
+            <i class="bi bi-moon-fill d-none" id="darkIcon"></i>
+            <i class="bi bi-sun-fill" id="lightIcon"></i>
+          </button>
+        </div>
+      </div>
+    </nav>
+    <div class="container py-5" style="padding-top: 80px !important">
       <div class="row justify-content-center">
         <!-- Login de admin -->
         <div class="col-12 col-md-6 mb-4" id="login-section">
@@ -85,5 +133,6 @@
 
     <script type="module" src="./js/login.js"></script>
     <script type="module" src="./js/admin.js"></script>
+    <script src="./js/darkMode.js"></script>
   </body>
 </html>
