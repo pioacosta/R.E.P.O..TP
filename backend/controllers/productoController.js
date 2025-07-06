@@ -79,6 +79,7 @@ const modificarProducto = async (req, res) => {
       precio: req.body.precio,
       imagen: imgURL,
       categoria_id: req.body.categoria_id,
+      stock: req.body.stock,
     });
 
     res.json({ mensaje: "Producto actualizado correctamente", producto });
