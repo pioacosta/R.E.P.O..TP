@@ -201,6 +201,7 @@ async function manejarCrearUsuario(e) {
     return;
   }
 
+  const nombre = form.nombre.value
   const email = form.email.value;
   const password = form.password.value;
   const passwordConfirm = form.passwordConfirm.value;
@@ -213,7 +214,7 @@ async function manejarCrearUsuario(e) {
   }
 
   try {
-    await crearUsuarioAdmin({ email, password });
+    await crearUsuarioAdmin({ nombre,email, password });
 
     msgDiv.textContent = "Usuario admin creado correctamente";
     msgDiv.className = "alert alert-success";
@@ -305,25 +306,15 @@ function verificarPermisos() {
   const crearUsuarioContent = document.getElementById("crear-usuario");
 
   if (rol !== "root") {
-    // Ocultar la pestaña de crear usuario admin si no es root
-    if (crearUsuarioTab) {
-      crearUsuarioTab.style.display = "none";
-    }
-    if (crearUsuarioContent) {
-      crearUsuarioContent.style.display = "none";
-    }
+    // Ocultar correctamente con clases de Bootstrap
+    if (crearUsuarioTab) crearUsuarioTab.classList.add("d-none");
+    if (crearUsuarioContent) crearUsuarioContent.classList.add("d-none");
 
-    console.log(
-      "Usuario sin permisos de root - Ocultando funciones administrativas"
-    );
+    console.log("Usuario sin permisos de root - Ocultando funciones administrativas");
   } else {
-    // Mostrar todas las funciones para usuarios root
-    if (crearUsuarioTab) {
-      crearUsuarioTab.style.display = "block";
-    }
-    if (crearUsuarioContent) {
-      crearUsuarioContent.style.display = "block";
-    }
+    // Mostrar correctamente removiendo clases
+    if (crearUsuarioTab) crearUsuarioTab.classList.remove("d-none");
+    if (crearUsuarioContent) crearUsuarioContent.classList.remove("d-none");
 
     console.log("Usuario root - Mostrando todas las funciones administrativas");
   }

@@ -294,72 +294,90 @@
             <!-- Acá se inyectan los productos como col-md-6 (dos por fila) -->
           </div>
         </div>
-        <div class="tab-pane fade" id="crear-usuario" role="tabpanel">
-          <!-- Contenido para crear usuario admin -->
-          <h4>Formulario para Crear Usuario Admin</h4>
-          <div class="border rounded-3 p-4 mt-3">
-            <form id="crearUsuarioForm" class="needs-validation" novalidate>
-              <!-- Email -->
-              <div class="mb-3 position-relative">
-                <label for="email" class="form-label">Email</label>
-                <input
-                  type="email"
-                  class="form-control"
-                  id="email"
-                  name="email"
-                  required
-                />
-                <div class="invalid-tooltip">
-                  Por favor ingresa un email válido.
-                </div>
-              </div>
-
-              <!-- Password -->
-              <div class="mb-3 position-relative">
-                <label for="password" class="form-label">Contraseña</label>
-                <input
-                  type="password"
-                  class="form-control"
-                  id="password"
-                  name="password"
-                  minlength="6"
-                  required
-                />
-                <div class="invalid-tooltip">
-                  La contraseña debe tener al menos 6 caracteres.
-                </div>
-              </div>
-
-              <!-- Confirmar Password -->
-              <div class="mb-3 position-relative">
-                <label for="passwordConfirm" class="form-label"
-                  >Confirmar Contraseña</label
-                >
-                <input
-                  type="password"
-                  class="form-control"
-                  id="passwordConfirm"
-                  name="passwordConfirm"
-                  minlength="6"
-                  required
-                />
-                <div class="invalid-tooltip">
-                  Las contraseñas deben coincidir.
-                </div>
-              </div>
-
-              <!-- Botón -->
-              <div class="text-center">
-                <button type="submit" class="btn btn-primary">
-                  Crear Usuario Admin
-                </button>
-              </div>
-
-              <!-- Mensaje -->
-              <div id="usuarioMsg" class="alert d-none mt-3" role="alert"></div>
-            </form>
-          </div>
+<div class="tab-pane fade" id="crear-usuario" role="tabpanel">
+  <!-- Contenido para crear usuario admin -->
+  <h4>Formulario para Crear Usuario Admin</h4>
+  <div class="border rounded-3 p-4 mt-3">
+    <form id="crearUsuarioForm" autocomplete="off" class="needs-validation" novalidate>
+      
+      <!-- Nombre -->
+      <div class="mb-3 position-relative">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input
+          type="text"
+          class="form-control"
+          id="nombre"
+          name="admin_nombre"
+          required
+          autocomplete="off"
+        />
+        <div class="invalid-tooltip">
+          Por favor ingresa un nombre válido.
         </div>
+      </div>
+
+      <!-- Email -->
+      <div class="mb-3 position-relative">
+        <label for="email" class="form-label">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          name="admin_email"
+          required
+          autocomplete="off"
+        />
+        <div class="invalid-tooltip">
+          Por favor ingresa un email válido.
+        </div>
+      </div>
+
+      <!-- Password -->
+      <div class="mb-3 position-relative">
+        <label for="password" class="form-label">Contraseña</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          name="admin_password"
+          minlength="6"
+          required
+          autocomplete="new-password"
+        />
+        <div class="invalid-tooltip">
+          La contraseña debe tener al menos 6 caracteres.
+        </div>
+      </div>
+
+      <!-- Confirmar Password -->
+      <div class="mb-3 position-relative">
+        <label for="passwordConfirm" class="form-label">Confirmar Contraseña</label>
+        <input
+          type="password"
+          class="form-control"
+          id="passwordConfirm"
+          name="admin_passwordConfirm"
+          minlength="6"
+          required
+          autocomplete="new-password"
+        />
+        <div class="invalid-tooltip">
+          Las contraseñas deben coincidir.
+        </div>
+      </div>
+
+      <!-- Botón -->
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary">
+          Crear Usuario Admin
+        </button>
+      </div>
+
+      <!-- Mensaje -->
+      <div id="usuarioMsg" class="alert d-none mt-3" role="alert"></div>
+    </form>
+  </div>
+</div>
 
         <div
           class="tab-pane fade"
@@ -371,7 +389,7 @@
           <div class="container my-4">
             <div class="row justify-content-center">
               <div class="col-12 col-md-6 col-lg-4">
-                <form id="categoriaForm" class="needs-validation" novalidate>
+                <form id="categoriaForm" autocomplete="off" class="needs-validation" novalidate>
                   <div class="mb-3 position-relative">
                     <label for="nombreCategoria" class="form-label"
                       >Nombre de la Categoría</label
