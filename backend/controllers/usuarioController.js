@@ -19,7 +19,7 @@ const crearUsuario = async (req, res) => {
       nombre: req.body.nombre,
       email: req.body.email,
       password: hashedPassword,
-      rol: req.body.rol,
+      rol: "admin",
     });
     res.status(201).json(nuevoUsuario);
   } catch (error) {
