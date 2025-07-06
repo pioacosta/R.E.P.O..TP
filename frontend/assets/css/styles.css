@@ -829,6 +829,7 @@ body.admin-page.bg-light {
 /* === MODO OSCURO === */
 /* Aplica a todas las páginas del cliente: inicio, productos, carrito, ticket */
 
+
 body.dark-mode {
   background-color: #121212;
   color: #ffffff;
@@ -860,6 +861,16 @@ body.dark-mode .nav-link.active {
   font-weight: 600 !important;
 }
 
+/* === FOOTER MODO OSCURO === */
+body.dark-mode #footer {
+  background-color: #1f1f1f !important;
+  color: #ffffff !important;
+  border-top: 1px solid #333 !important;
+}
+
+body.dark-mode #footer a {
+  color: #4dabf7 !important; /* si hay enlaces en el footer */
+}
 /* === ENLACE CANCELAR COMPRA MODO OSCURO === */
 body.dark-mode .nav-link.text-danger {
   color: #ff6b6b !important;

@@ -218,6 +218,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Si hay nombre y el usuario vuelve a inicio, borra la sesión y avisa
   if (nombre && window.location.pathname.endsWith("inicio.html")) {
     sessionStorage.removeItem("nombreUsuario");
+    sessionStorage.removeItem("carrito");
     Swal.fire({
       title: "Sesión cerrada",
       text: "Debes ingresar tu nombre nuevamente",
