@@ -1,3 +1,5 @@
+import { loginAdmin, logoutAdmin } from "./fetch.js";
+
 document.addEventListener("DOMContentLoaded", () => {
   const loginForm = document.getElementById("loginForm");
   const token = localStorage.getItem("adminToken");
@@ -33,19 +35,20 @@ document.addEventListener("DOMContentLoaded", () => {
     errorDiv.style.display = "none";
 
     try {
-      const res = await fetch("http://localhost:3000/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
+      const data = await loginAdmin(email, password);
 
-      const data = await res.json();
-
-      if (res.ok && data.token) {
+      if (data.token) {
         localStorage.setItem("adminToken", data.token);
-        const username = data.nombre ?? email.split("@")[0];
+        const username = data.usuario?.nombre ?? email.split("@")[0];
         sessionStorage.setItem("usuario", username);
-        sessionStorage.setItem("rol", data.rol);
+
+        // El rol viene en data.usuario.rol según el backend
+        const rolUsuario = data.usuario?.rol || "admin";
+        sessionStorage.setItem("rol", rolUsuario);
+
+        console.log("Datos del login:", data);
+        console.log("Rol guardado:", rolUsuario);
+
         toggleAdminUI(true);
         window.location.href = "./dashboard.html";
       } else {
@@ -53,13 +56,14 @@ document.addEventListener("DOMContentLoaded", () => {
         errorDiv.style.display = "block";
       }
     } catch (err) {
-      errorDiv.textContent = "Error de conexión";
+      errorDiv.textContent = err.message || "Error de conexión";
       errorDiv.style.display = "block";
     }
   });
 });
 
 window.logoutAdmin = function () {
+  logoutAdmin();
   localStorage.clear();
   sessionStorage.clear();
   location.href = "./inicio.html";

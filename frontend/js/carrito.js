@@ -1,3 +1,5 @@
+import { crearVenta } from "./fetch.js";
+
 const papa = {
   id: 1,
   nombre: "Shampoopo",
@@ -37,17 +39,7 @@ async function registrarVentas(e) {
   };
 
   try {
-    const respuesta = await fetch("http://localhost:3000/ventas", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(venta),
-    });
-
-    if (!respuesta.ok) throw new Error("No se pudo registrar la venta.");
-
-    const data = await respuesta.json();
+    const data = await crearVenta(venta);
     console.log("Venta guardada:", data);
 
     confirmarCompra();

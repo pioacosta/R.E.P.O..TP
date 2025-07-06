@@ -1,3 +1,9 @@
+import {
+  obtenerProductoPorId,
+  obtenerCategorias,
+  actualizarProducto,
+} from "./fetch.js";
+
 document.addEventListener("DOMContentLoaded", async () => {
   const params = new URLSearchParams(window.location.search);
   const id = params.get("id");
@@ -18,10 +24,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   try {
-    const resProducto = await fetch(`http://localhost:3000/productos/${id}`);
-    if (!resProducto.ok) throw new Error("Error al obtener el producto");
-
-    const producto = await resProducto.json();
+    const producto = await obtenerProductoPorId(id);
 
     await cargarCategoriasSeleccionadas(producto.categoria_id);
 
@@ -69,36 +72,20 @@ document.addEventListener("DOMContentLoaded", async () => {
     const formData = new FormData(form);
 
     try {
-      const res = await fetch(`http://localhost:3000/productos/${id}`, {
-        method: "PUT",
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-        body: formData,
-      });
+      const data = await actualizarProducto(id, formData);
 
-      const data = await res.json();
-
-      if (res.ok) {
-        if (msgDiv) {
-          msgDiv.textContent = "Producto actualizado correctamente.";
-          msgDiv.className = "alert alert-success";
-          msgDiv.classList.remove("d-none");
-        }
-        
-        window.location.href = "dashboard.html";
-        
-      } else {
-        if (msgDiv) {
-          msgDiv.textContent = data.mensaje || "Error al actualizar el producto.";
-          msgDiv.className = "alert alert-danger";
-          msgDiv.classList.remove("d-none");
-        }
+      if (msgDiv) {
+        msgDiv.textContent = "Producto actualizado correctamente.";
+        msgDiv.className = "alert alert-success";
+        msgDiv.classList.remove("d-none");
       }
+
+      window.location.href = "dashboard.html";
     } catch (error) {
       console.error(error);
       if (msgDiv) {
-        msgDiv.textContent = "Error de conexión.";
+        msgDiv.textContent =
+          error.message || "Error al actualizar el producto.";
         msgDiv.className = "alert alert-danger";
         msgDiv.classList.remove("d-none");
       }
@@ -108,10 +95,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 async function cargarCategoriasSeleccionadas(categoriaActualId) {
   try {
-    const response = await fetch("http://localhost:3000/categorias");
-    if (!response.ok) throw new Error("Error al obtener las categorías");
-
-    const categorias = await response.json();
+    const categorias = await obtenerCategorias();
     const select = document.getElementById("categoria_id");
 
     categorias.forEach((cat) => {

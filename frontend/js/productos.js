@@ -1,10 +1,11 @@
+import { obtenerCategorias, obtenerProductos } from "./fetch.js";
+
 document.addEventListener("DOMContentLoaded", async () => {
   const filtroCategoria = document.getElementById("filtroCategoria");
 
   try {
     // 🟦 Cargar categorías dinámicamente
-    const resCat = await fetch("http://localhost:3000/categorias");
-    const categorias = await resCat.json();
+    const categorias = await obtenerCategorias();
 
     categorias.forEach((cat) => {
       const option = document.createElement("option");
@@ -14,8 +15,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     // 🟦 Cargar productos
-    const resProd = await fetch("http://localhost:3000/productos");
-    const productos = await resProd.json();
+    const productos = await obtenerProductos();
     const activos = productos.filter((p) => p.activo !== false);
 
     // Guardar para filtrado global
@@ -46,8 +46,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 const cargarProductos = async () => {
-  const resProd = await fetch("http://localhost:3000/productos");
-  const productos = await resProd.json();
+  return await obtenerProductos();
   const activos = productos.filter((p) => p.activo !== false);
   return activos;
 };
@@ -215,8 +214,7 @@ function aplicarFiltros() {
 
 async function cargarCategorias() {
   try {
-    const response = await fetch("http://localhost:3000/categorias");
-    const categorias = await response.json();
+    const categorias = await obtenerCategorias();
 
     const select = document.getElementById("filtroCategoria");
 

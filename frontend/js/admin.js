@@ -1,3 +1,5 @@
+import { crearProducto, obtenerCategorias } from "./fetch.js";
+
 document.addEventListener("DOMContentLoaded", async () => {
   const form = document.getElementById("productForm");
   const msgDiv = document.getElementById("productMsg");
@@ -23,27 +25,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     const formData = new FormData(form);
 
     try {
-      const res = await fetch("http://localhost:3000/productos/crear", {
-        method: "POST",
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-        body: formData,
-      });
-      const data = await res.json();
-      if (res.ok) {
-        msgDiv.textContent = "Producto agregado correctamente";
-        msgDiv.className = "alert alert-success";
-        msgDiv.classList.remove("d-none");
-        form.reset();
-        form.classList.remove("was-validated");
-      } else {
-        msgDiv.textContent = data.mensaje || "Error al agregar producto";
-        msgDiv.className = "alert alert-danger";
-        msgDiv.classList.remove("d-none");
-      }
+      const data = await crearProducto(formData);
+      msgDiv.textContent = "Producto agregado correctamente";
+      msgDiv.className = "alert alert-success";
+      msgDiv.classList.remove("d-none");
+      form.reset();
+      form.classList.remove("was-validated");
     } catch (err) {
-      msgDiv.textContent = "Error de conexión";
+      msgDiv.textContent = err.message || "Error al agregar producto";
       msgDiv.className = "alert alert-danger";
       msgDiv.classList.remove("d-none");
     }
@@ -53,8 +42,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const select = document.getElementById("categoria_id");
   if (select) {
     try {
-      const res = await fetch("http://localhost:3000/categorias");
-      const categorias = await res.json();
+      const categorias = await obtenerCategorias();
       categorias.forEach((cat) => {
         const option = document.createElement("option");
         option.value = cat.id;
