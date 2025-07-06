@@ -5,184 +5,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin Dashboard</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="16x16" href="./assets/img/logo_tema_claro.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/img/logo_tema_claro.png" />
+  <link rel="shortcut icon" href="./assets/img/logo_tema_claro.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./assets/img/logo_tema_claro.png" />
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4/animate.min.css" />
-  <style>
-    body {
-      background-color: #f8f9fa;
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-
-    .tab-content>.tab-pane {
-      padding: 2rem;
-      background-color: #fff;
-      border-radius: 1rem;
-      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-      transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    /* === MODO OSCURO === */
-
-
-    /* === FOOTER MODO OSCURO === */
-body.dark-mode #footer {
-  background-color: #1f1f1f !important;
-  color: #ffffff !important;
-  border-top: 1px solid #333 !important;
-}
-
-body.dark-mode #footer a {
-  color: #4dabf7 !important; /* si hay enlaces en el footer */
-}
-
-    body.dark-mode {
-      background-color: #121212;
-      color: #ffffff;
-    }
-
-    body.dark-mode .navbar {
-      background-color: #1f1f1f !important;
-      border-bottom: 1px solid #333;
-    }
-
-    body.dark-mode .navbar-brand,
-    body.dark-mode .nav-link {
-      color: #ffffff !important;
-    }
-
-    body.dark-mode .nav-link:hover {
-      color: #0d6efd !important;
-    }
-
-    body.dark-mode .tab-content>.tab-pane {
-      background-color: #1e1e1e;
-      color: #ffffff;
-      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
-    }
-
-    body.dark-mode .nav-tabs .nav-link {
-      background-color: #2d2d2d;
-      border: 1px solid #404040;
-      color: #ffffff;
-    }
-
-    body.dark-mode .nav-tabs .nav-link:hover {
-      background-color: #404040;
-      border-color: #555;
-    }
-
-    body.dark-mode .nav-tabs .nav-link.active {
-      background-color: #1e1e1e;
-      border-color: #404040 #404040 #1e1e1e;
-      color: #ffffff;
-    }
-
-    body.dark-mode .form-control,
-    body.dark-mode .form-select {
-      background-color: #2d2d2d;
-      border-color: #404040;
-      color: #ffffff;
-    }
-
-    body.dark-mode .form-control:focus,
-    body.dark-mode .form-select:focus {
-      background-color: #2d2d2d;
-      border-color: #0d6efd;
-      color: #ffffff;
-      box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
-    }
-
-    body.dark-mode .card {
-      background-color: #1e1e1e;
-      border-color: #404040;
-      color: #ffffff;
-    }
-
-    body.dark-mode .alert {
-      background-color: #2d2d2d;
-      border-color: #404040;
-      color: #ffffff;
-    }
-
-    body.dark-mode .border {
-      border-color: #404040 !important;
-    }
-
-    body.dark-mode h1,
-    body.dark-mode h2,
-    body.dark-mode h3,
-    body.dark-mode h4,
-    body.dark-mode h5,
-    body.dark-mode h6 {
-      color: #ffffff;
-    }
-
-    /* Texto muted en modo oscuro */
-    body.dark-mode .text-muted {
-      color: #adb5bd !important;
-    }
-
-    /* Botones en modo oscuro */
-    body.dark-mode .btn-outline-primary {
-      border-color: #0d6efd;
-      color: #0d6efd;
-    }
-
-    body.dark-mode .btn-outline-primary:hover {
-      background-color: #0d6efd;
-      color: #ffffff;
-    }
-
-    body.dark-mode .btn-outline-danger {
-      border-color: #dc3545;
-      color: #dc3545;
-    }
-
-    body.dark-mode .btn-outline-danger:hover {
-      background-color: #dc3545;
-      color: #ffffff;
-    }
-
-    body.dark-mode .btn-outline-success {
-      border-color: #198754;
-      color: #198754;
-    }
-
-    body.dark-mode .btn-outline-success:hover {
-      background-color: #198754;
-      color: #ffffff;
-    }
-
-    /* Indicadores de usuario en modo oscuro */
-    body.dark-mode .badge {
-      color: #121212 !important;
-    }
-
-    body.dark-mode .text-muted {
-      color: #adb5bd !important;
-    }
-
-    /* Animación del botón toggle */
-    #darkModeToggle {
-      position: relative;
-      overflow: hidden;
-      transition: all 0.3s ease;
-    }
-
-    #darkModeToggle i {
-      transition: all 0.3s ease;
-    }
-
-    body.dark-mode #darkModeToggle {
-      background-color: #2d2d2d;
-      border-color: #404040;
-      color: #ffffff;
-    }
-  </style>
+  <link href="./assets/css/styles.css" rel="stylesheet" />
+  <link href="./assets/css/dark-mode.css" rel="stylesheet" />
+  <link href="./assets/css/admin.css" rel="stylesheet" />
 </head>
 
-<body class="container py-4" style="padding-top: 80px">
+<body class="container admin-page" style="padding-bottom: 60px;">
   <nav class="navbar navbar-expand-md bg-white shadow-sm fixed-top">
     <div class="container">
       <a class="navbar-brand fw-bold d-flex align-items-center">
@@ -215,11 +53,18 @@ body.dark-mode #footer a {
       </div>
     </div>
   </nav>
-  <div class="container py-5">
+  
+  <!-- MAIN CONTENT -->
+  <div class="container">
+    <!-- Título principal mejorado -->
+    <div class="glass-card p-4 p-md-5 mb-5 mx-auto max-width-700">
+      <h1 class="display-5 fw-bold mb-3 text-primary text-center">Panel de Administración</h1>
+      <p class="text-muted fs-5 mb-0 text-center">Gestión completa del sistema R.E.P.O.</p>
+    </div>
+    
     <div class="d-flex justify-content-between align-items-center mb-4">
-      <h2 class="text-center">Panel de Administración</h2>
       <div class="d-flex align-items-center">
-        <span class="badge bg-secondary" id="rolIndicator">Cargando...</span>
+        <span class="badge bg-secondary fs-6 px-3 py-2" id="rolIndicator">Cargando...</span>
       </div>
     </div>
 
@@ -357,7 +202,7 @@ body.dark-mode #footer a {
       </div>
       -->
     </div>
-<footer id="footer" class="bg-white shadow-sm text-dark text-center py-4 px-3 mt-5 border-top w-100 fixed-bottom">
+<footer id="footer" class="bg-white shadow-sm text-dark text-center py-4 px-3 mt-5 border-top w-100">
   <div class="container">
     <p class="mb-1 fw-semibold">Sistema de autoservicio - UTN</p>
     <p class="mb-1">Desarrollado por Pio Acosta y Luciano Bordon</p>

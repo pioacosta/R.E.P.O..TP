@@ -1,97 +1,173 @@
 <!DOCTYPE html>
 <html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <!-- Hoja personalizada — DESPUÉS de Bootstrap -->
+    <link href="./assets/css/styles.css" rel="stylesheet" />
+    <link href="./assets/css/dark-mode.css" rel="stylesheet" />
+    <link href="./assets/css/admin.css" rel="stylesheet" />
+    <title>Dashboard</title>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <!-- Bootstrap Icons -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
-  <!-- Hoja personalizada — DESPUÉS de Bootstrap -->
-  <link href="./assets/css/styles.css" rel="stylesheet" />
-  <style>
-    /* Forzar el fondo de admin */
-    body.admin-page {
-      background: url("./assets/img/fondo_admin.png") center/cover no-repeat !important;
-      background-attachment: fixed !important;
-      min-height: 100vh !important;
-      background-color: #f8f9fa !important;
-      /* Fallback color */
-    }
-  </style>
-  <title>Dashboard</title>
-</head>
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="./assets/img/logo_tema_claro.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/img/logo_tema_claro.png"
+    />
+    <link rel="shortcut icon" href="./assets/img/logo_tema_claro.png" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./assets/img/logo_tema_claro.png"
+    />
+  </head>
 
-<body class="admin-page">
-  <!-- NAVBAR -->
-  <nav class="navbar navbar-expand-md bg-white shadow-sm fixed-top">
-    <div class="container">
-      <a class="navbar-brand fw-bold d-flex align-items-center">
-        <img id="logoClaro" src="./assets/img/logo_tema_claro.png" alt="R.E.P.O. Logo" height="50" class="me-2" />
-        <img id="logoOscuro" src="./assets/img/logo_tema_oscuro.png" alt="R.E.P.O. Logo" height="50"
-          class="me-2 d-none" />
-        R.E.P.O.
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
-        aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="mainNav">
-        <ul class="navbar-nav ms-auto gap-md-2"></ul>
-
-        <!-- Toggle de modo oscuro -->
-        <button id="darkModeToggle" class="btn btn-outline-secondary btn-sm ms-3" type="button" title="Cambiar tema">
-          <i class="bi bi-moon-fill d-none" id="darkIcon"></i>
-          <i class="bi bi-sun-fill" id="lightIcon"></i>
+  <body class="admin-page">
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-md bg-white shadow-sm fixed-top">
+      <div class="container">
+        <a class="navbar-brand fw-bold d-flex align-items-center">
+          <img
+            id="logoClaro"
+            src="./assets/img/logo_tema_claro.png"
+            alt="R.E.P.O. Logo"
+            height="50"
+            class="me-2"
+          />
+          <img
+            id="logoOscuro"
+            src="./assets/img/logo_tema_oscuro.png"
+            alt="R.E.P.O. Logo"
+            height="50"
+            class="me-2 d-none"
+          />
+          R.E.P.O.
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#mainNav"
+          aria-controls="mainNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
         </button>
+
+        <div class="collapse navbar-collapse" id="mainNav">
+          <ul class="navbar-nav ms-auto gap-md-2"></ul>
+
+          <!-- Toggle de modo oscuro -->
+          <button
+            id="darkModeToggle"
+            class="btn btn-outline-secondary btn-sm ms-3"
+            type="button"
+            title="Cambiar tema"
+          >
+            <i class="bi bi-moon-fill d-none" id="darkIcon"></i>
+            <i class="bi bi-sun-fill" id="lightIcon"></i>
+          </button>
+        </div>
       </div>
-    </div>
-  </nav>
-  <div class="container py-5" style="padding-top: 80px !important">
-    <div class="row justify-content-center">
-      <!-- Login de admin -->
-      <div class="col-12 col-md-6 mb-4" id="login-section">
-        <div class="card shadow">
-          <div class="card-body">
-            <h5 class="card-title mb-3">Login Administrador</h5>
-            <form id="loginForm">
-              <div class="mb-3">
-                <label for="loginEmail" class="form-label">Email</label>
-                <input type="email" class="form-control" id="loginEmail" required />
-              </div>
-              <div class="mb-3">
-                <label for="loginPassword" class="form-label">Contraseña</label>
-                <input type="password" class="form-control" id="loginPassword" required />
-              </div>
-              <button type="submit" class="btn btn-primary w-100 mb-2">
-                Ingresar
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="container" style="padding-top: 120px; padding-bottom: 60px">
+      <!-- Título principal mejorado -->
+      <div class="glass-card p-4 p-md-5 mb-5 mx-auto max-width-700">
+        <h1 class="display-5 fw-bold mb-3 text-primary text-center">
+          Panel de Administración
+        </h1>
+        <p class="text-muted fs-5 mb-0 text-center">
+          Acceso exclusivo para administradores del sistema
+        </p>
+      </div>
+
+      <div class="row justify-content-center">
+        <!-- Login de admin -->
+        <div class="col-12 col-md-6 mb-4" id="login-section">
+          <div class="card shadow-lg border-0">
+            <div class="card-body p-4 p-md-5">
+              <h5 class="card-title mb-4 fs-4 text-center">Iniciar Sesión</h5>
+              <form id="loginForm">
+                <div class="mb-3">
+                  <label for="loginEmail" class="form-label">Email</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="loginEmail"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="loginPassword" class="form-label"
+                    >Contraseña</label
+                  >
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="loginPassword"
+                    required
+                  />
+                </div>
+                <button type="submit" class="btn btn-primary w-100 mb-2">
+                  Ingresar
+                </button>
+              </form>
+
+              <!-- BOTÓN SALIR -->
+              <button
+                type="button"
+                class="btn btn-outline-danger w-100"
+                onclick="window.location.href='./inicio.html'"
+              >
+                <i class="bi bi-arrow-left me-2"></i>Salir
               </button>
-            </form>
 
-            <!-- BOTÓN SALIR -->
-            <button type="button" class="btn btn-outline-danger w-100" onclick="window.location.href='./inicio.html'">
-              <i class="bi bi-arrow-left me-2"></i>Salir
-            </button>
-
-            <!-- MENSAJE DE ERROR -->
-            <div id="loginError" class="text-danger mt-2" style="display: none"></div>
+              <!-- MENSAJE DE ERROR -->
+              <div
+                id="loginError"
+                class="text-danger mt-2"
+                style="display: none"
+              ></div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <footer id="footer" class="bg-white shadow-sm text-dark text-center py-4 px-3 mt-5 border-top w-100 fixed-bottom">
-    <div class="container">
-      <p class="mb-1 fw-semibold">Sistema de autoservicio - UTN</p>
-      <p class="mb-1">Desarrollado por Pio Acosta y Luciano Bordon</p>
-      <small class="d-block mt-2">&copy; 2025 Todos los derechos reservados.</small>
-    </div>
-  </footer>
-  <script type="module" src="./js/login.js"></script>
-  <script type="module" src="./js/admin.js"></script>
-  <script src="./js/darkMode.js"></script>
-</body>
-
+    <footer
+      id="footer"
+      class="bg-white shadow-sm text-dark text-center py-4 px-3 mt-5 border-top w-100"
+    >
+      <div class="container">
+        <p class="mb-1 fw-semibold">Sistema de autoservicio - UTN</p>
+        <p class="mb-1">Desarrollado por Pio Acosta y Luciano Bordon</p>
+        <small class="d-block mt-2"
+          >&copy; 2025 Todos los derechos reservados.</small
+        >
+      </div>
+    </footer>
+    <script type="module" src="./js/login.js"></script>
+    <script type="module" src="./js/admin.js"></script>
+    <script src="./js/darkMode.js"></script>
+  </body>
 </html>

@@ -1,0 +1,507 @@
+/* === MODO OSCURO - ESTILOS CENTRALIZADOS === */
+
+/* Variables para modo oscuro */
+:root {
+  --dark-bg: #121212;
+  --dark-surface: #1e1e1e;
+  --dark-surface-variant: #2d2d2d;
+  --dark-border: #404040;
+  --dark-text: #ffffff;
+  --dark-text-secondary: #adb5bd;
+  --dark-primary: #4dabf7;
+  --dark-success: #198754;
+  --dark-warning: #ffc107;
+  --dark-danger: #dc3545;
+  --dark-info: #0dcaf0;
+}
+
+/* === ESTILOS BASE MODO OSCURO === */
+body.dark-mode {
+  background-color: var(--dark-bg);
+  color: var(--dark-text);
+}
+
+/* === NAVBAR MODO OSCURO === */
+body.dark-mode .navbar {
+  background: rgba(31, 31, 31, 0.95) !important;
+  border-bottom: 1px solid var(--dark-border);
+}
+
+body.dark-mode .navbar-brand {
+  background: linear-gradient(135deg, var(--dark-primary), #845ef7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+body.dark-mode .nav-link {
+  color: var(--dark-text) !important;
+}
+
+body.dark-mode .nav-link:hover {
+  color: var(--dark-primary) !important;
+}
+
+body.dark-mode .nav-link.active {
+  color: var(--dark-primary) !important;
+  font-weight: 600 !important;
+}
+
+/* Enlaces especiales en navbar */
+body.dark-mode .nav-link.text-danger {
+  color: #ff6b6b !important;
+}
+
+body.dark-mode .nav-link.text-danger:hover {
+  color: #ff5252 !important;
+}
+
+/* === FOOTER MODO OSCURO === */
+body.dark-mode #footer {
+  background-color: var(--dark-surface) !important;
+  color: var(--dark-text) !important;
+  border-top: 1px solid var(--dark-border) !important;
+}
+
+body.dark-mode #footer a {
+  color: var(--dark-primary) !important;
+}
+
+/* === CARDS Y GLASS-CARD MODO OSCURO === */
+body.dark-mode .card {
+  background-color: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border);
+  color: var(--dark-text);
+}
+
+body.dark-mode .card-header {
+  background-color: var(--dark-surface-variant);
+  border-bottom: 1px solid var(--dark-border);
+}
+
+body.dark-mode .card-body {
+  background-color: var(--dark-surface);
+}
+
+body.dark-mode .glass-card {
+  background: rgba(30, 30, 30, 0.85) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: var(--dark-text) !important;
+}
+
+body.dark-mode .glass-card h1,
+body.dark-mode .glass-card h2,
+body.dark-mode .glass-card h3,
+body.dark-mode .glass-card p {
+  color: var(--dark-text) !important;
+}
+
+body.dark-mode .filter-card {
+  background: rgba(30, 30, 30, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* === FORMULARIOS MODO OSCURO === */
+body.dark-mode .form-control,
+body.dark-mode .form-select {
+  background-color: var(--dark-surface-variant);
+  border: 1px solid var(--dark-border);
+  color: var(--dark-text);
+}
+
+body.dark-mode .form-control:focus,
+body.dark-mode .form-select:focus {
+  background-color: var(--dark-surface-variant);
+  border-color: var(--dark-primary);
+  color: var(--dark-text);
+  box-shadow: 0 0 0 0.25rem rgba(77, 171, 247, 0.25);
+}
+
+body.dark-mode .form-label {
+  color: var(--dark-text);
+}
+
+/* Glass inputs específicos */
+body.dark-mode .glass-input {
+  background: rgba(45, 45, 45, 0.9);
+  border: 2px solid rgba(77, 171, 247, 0.3);
+  color: var(--dark-text);
+}
+
+body.dark-mode .glass-input:focus {
+  border-color: var(--dark-primary);
+  box-shadow: 0 0 0 0.25rem rgba(77, 171, 247, 0.15);
+  background: rgba(45, 45, 45, 0.95);
+}
+
+body.dark-mode .glass-input::placeholder {
+  color: var(--dark-text) !important;
+  opacity: 0.8;
+}
+
+/* === TABLAS MODO OSCURO === */
+body.dark-mode .table {
+  color: var(--dark-text);
+  background-color: var(--dark-surface);
+}
+
+body.dark-mode .table-light {
+  background-color: var(--dark-surface-variant) !important;
+  color: var(--dark-text);
+}
+
+body.dark-mode .table-hover tbody tr:hover {
+  background-color: var(--dark-border);
+}
+
+body.dark-mode .table td,
+body.dark-mode .table th {
+  border-color: var(--dark-border);
+}
+
+/* === BOTONES MODO OSCURO === */
+body.dark-mode .btn-outline-primary {
+  border-color: var(--dark-primary);
+  color: var(--dark-primary);
+}
+
+body.dark-mode .btn-outline-primary:hover {
+  background-color: var(--dark-primary);
+  border-color: var(--dark-primary);
+  color: var(--dark-text);
+}
+
+body.dark-mode .btn-outline-secondary {
+  border-color: #6c757d;
+  color: var(--dark-text);
+}
+
+body.dark-mode .btn-outline-secondary:hover {
+  background-color: var(--dark-surface-variant);
+  border-color: var(--dark-primary);
+  color: var(--dark-primary);
+}
+
+body.dark-mode .btn-outline-danger {
+  border-color: var(--dark-danger);
+  color: var(--dark-danger);
+}
+
+body.dark-mode .btn-outline-danger:hover {
+  background-color: var(--dark-danger);
+  color: var(--dark-text);
+}
+
+body.dark-mode .btn-outline-success {
+  border-color: var(--dark-success);
+  color: var(--dark-success);
+}
+
+body.dark-mode .btn-outline-success:hover {
+  background-color: var(--dark-success);
+  color: var(--dark-text);
+}
+
+body.dark-mode .btn-success {
+  background: linear-gradient(135deg, var(--dark-success), #20c997) !important;
+  border: none !important;
+}
+
+body.dark-mode .btn-success:hover {
+  background: linear-gradient(135deg, #20c997, #0d6efd) !important;
+}
+
+/* === TECLADO VIRTUAL MODO OSCURO === */
+body.dark-mode .keyboard-btn {
+  background-color: var(--dark-surface-variant);
+  border-color: var(--dark-primary);
+  color: var(--dark-primary);
+}
+
+body.dark-mode .keyboard-btn:hover {
+  background-color: var(--dark-primary);
+  border-color: var(--dark-primary);
+  color: var(--dark-text);
+}
+
+body.dark-mode .keyboard-action {
+  background-color: var(--dark-surface-variant);
+  color: var(--dark-text);
+}
+
+body.dark-mode .keyboard-action.btn-danger {
+  background-color: var(--dark-danger);
+  border-color: var(--dark-danger);
+}
+
+body.dark-mode .keyboard-action.btn-success {
+  background-color: var(--dark-success);
+  border-color: var(--dark-success);
+}
+
+body.dark-mode .keyboard-action.btn-secondary {
+  background-color: #495057;
+  border-color: #495057;
+}
+
+/* === DISPLAY NOMBRE MODO OSCURO === */
+body.dark-mode .display-nombre {
+  background-color: var(--dark-surface-variant) !important;
+  border-color: var(--dark-primary);
+  color: var(--dark-primary) !important;
+}
+
+/* === TICKET MODO OSCURO === */
+body.dark-mode .ticket-container {
+  background-color: var(--dark-surface);
+  border: 1px solid var(--dark-border);
+}
+
+/* === TEXTOS Y COLORES MODO OSCURO === */
+body.dark-mode .text-primary {
+  color: var(--dark-primary) !important;
+}
+
+body.dark-mode .text-muted {
+  color: var(--dark-text-secondary) !important;
+}
+
+body.dark-mode .text-dark {
+  color: var(--dark-text) !important;
+}
+
+/* === BACKGROUNDS DE PÁGINAS MODO OSCURO === */
+body.dark-mode.inicio-page {
+  background: url("../img/fondo_bienvenida.png") center / cover no-repeat;
+  background-color: var(--dark-bg);
+}
+
+body.dark-mode.productos-page {
+  background: url("../img/fondo_principal.png") center / cover no-repeat;
+  background-color: var(--dark-bg);
+}
+
+body.dark-mode.carrito-page {
+  background: url("../img/fondo_checkout.png") center / cover no-repeat;
+  background-color: var(--dark-bg);
+}
+
+body.dark-mode.ticket-page {
+  background-color: var(--dark-bg);
+}
+
+body.dark-mode.admin-page {
+  background: url("../img/fondo_admin.png") center/cover no-repeat !important;
+  background-attachment: fixed !important;
+  min-height: 100vh !important;
+}
+
+/* === ALERTAS Y MENSAJES MODO OSCURO === */
+body.dark-mode .alert {
+  background-color: var(--dark-surface-variant);
+  border-color: var(--dark-border);
+  color: var(--dark-text);
+}
+
+body.dark-mode .alert-info {
+  background-color: rgba(77, 171, 247, 0.2);
+  border-color: var(--dark-primary);
+  color: var(--dark-primary);
+}
+
+body.dark-mode .alert-success {
+  background-color: rgba(25, 135, 84, 0.2);
+  border-color: var(--dark-success);
+  color: var(--dark-success);
+}
+
+body.dark-mode .alert-warning {
+  background-color: rgba(255, 193, 7, 0.2);
+  border-color: var(--dark-warning);
+  color: var(--dark-warning);
+}
+
+body.dark-mode .alert-danger {
+  background-color: rgba(220, 53, 69, 0.2);
+  border-color: var(--dark-danger);
+  color: var(--dark-danger);
+}
+
+body.dark-mode .invalid-feedback {
+  color: var(--dark-danger);
+}
+
+/* === BORDERS Y SEPARADORES MODO OSCURO === */
+body.dark-mode .border {
+  border-color: var(--dark-border) !important;
+}
+
+body.dark-mode .border-end {
+  border-right-color: var(--dark-border) !important;
+}
+
+body.dark-mode .border-bottom {
+  border-bottom-color: var(--dark-border) !important;
+}
+
+body.dark-mode hr {
+  border-color: var(--dark-border);
+}
+
+/* === PRODUCTOS GRID MODO OSCURO === */
+body.dark-mode .producto-card {
+  background-color: var(--dark-surface);
+  border: 1px solid var(--dark-border);
+}
+
+body.dark-mode .producto-card:hover {
+  box-shadow: 0 8px 25px rgba(77, 171, 247, 0.2);
+  border-color: var(--dark-primary);
+}
+
+/* === CARRITO ITEMS MODO OSCURO === */
+body.dark-mode .carrito-item {
+  background-color: var(--dark-surface);
+  border: 1px solid var(--dark-border);
+}
+
+body.dark-mode .carrito-item:hover {
+  background-color: var(--dark-surface-variant);
+}
+
+/* === LOGOS EN NAVBAR === */
+.navbar-brand img {
+  transition: opacity 0.3s ease-in-out;
+  object-fit: contain;
+}
+
+#logoClaro,
+#logoOscuro {
+  max-height: 50px;
+  width: auto;
+}
+
+/* === BOTÓN TOGGLE MODO OSCURO === */
+#darkModeToggle {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  transition: all 0.3s ease;
+  border-radius: 0.5rem;
+}
+
+#darkModeToggle:hover {
+  background-color: #e9ecef;
+  border-color: #6c757d;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+#darkModeToggle i {
+  transition: all 0.3s ease;
+}
+
+#darkModeToggle:hover i {
+  transform: scale(1.15);
+  color: #495057;
+}
+
+body.dark-mode #darkModeToggle {
+  background-color: var(--dark-surface-variant);
+  border-color: var(--dark-border);
+  color: var(--dark-text);
+}
+
+body.dark-mode #darkModeToggle:hover {
+  background-color: var(--dark-border) !important;
+  border-color: var(--dark-primary) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(77, 171, 247, 0.25) !important;
+  color: var(--dark-primary) !important;
+}
+
+body.dark-mode #darkModeToggle:hover i {
+  color: var(--dark-primary) !important;
+  transform: scale(1.15);
+}
+
+/* === DASHBOARD Y TABS MODO OSCURO === */
+.tab-content > .tab-pane {
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+body.dark-mode .tab-content > .tab-pane {
+  background-color: var(--dark-surface);
+  color: var(--dark-text);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .nav-tabs .nav-link {
+  background-color: var(--dark-surface-variant);
+  border: 1px solid var(--dark-border);
+  color: var(--dark-text);
+}
+
+body.dark-mode .nav-tabs .nav-link:hover {
+  background-color: var(--dark-border);
+  border-color: #555;
+}
+
+body.dark-mode .nav-tabs .nav-link.active {
+  background-color: var(--dark-surface);
+  border-color: var(--dark-border) var(--dark-border) var(--dark-surface);
+  color: var(--dark-text);
+}
+
+body.dark-mode .badge {
+  color: var(--dark-bg) !important;
+}
+
+/* === ESTILOS ADICIONALES PARA BOTONES === */
+.btn-modern {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.btn-modern::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s;
+  z-index: -1;
+}
+
+.btn-modern:hover::before {
+  left: 100%;
+}
+
+/* === RESPONSIVE MODO OSCURO === */
+@media (max-width: 768px) {
+  body.dark-mode .glass-card {
+    background: rgba(20, 20, 20, 0.9);
+  }
+}
+
+@media (max-width: 576px) {
+  #logoClaro,
+  #logoOscuro {
+    max-height: 50px;
+  }
+
+  .navbar-brand {
+    font-size: 1rem;
+  }
+}
