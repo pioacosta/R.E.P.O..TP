@@ -181,6 +181,7 @@
         <div class="col-12 col-md-10 col-lg-8">
           <div class="card shadow-lg rounded-4 p-4 bg-light">
             <h2 class="text-center mb-4">Agregar Producto</h2>
+           
             <form class="row g-3 needs-validation" novalidate id="formAgregar">
               <!-- Nombre -->
               <div class="col-12">
@@ -285,7 +286,7 @@
                   Seleccione una categoría válida.
                 </div>
               </div>
-
+               <div id="msgDiv" class="alert d-none" role="alert"></div>  
               <!-- Botón -->
               <div class="col-12">
                 <div
@@ -328,6 +329,8 @@
       </div>
     </div>
 
+
+    <script src="./js/agregarProducto.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./js/proteccion.js"></script>
     <script src="./js/login.js"></script>
