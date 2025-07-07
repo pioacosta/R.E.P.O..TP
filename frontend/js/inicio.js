@@ -1,3 +1,9 @@
+/*
+ * INICIO.JS - Lógica de la página principal
+ * Maneja el teclado virtual, login de usuarios
+ * Control de acceso al sistema
+ */
+
 // Variables globales para el teclado virtual y físico
 let currentName = "";
 let capsLock = false;

@@ -1,3 +1,9 @@
+/*
+ * ATAJOS.JS - Atajos de teclado del sistema
+ * Shortcuts para navegación rápida y accesibilidad
+ * Ctrl+Shift+A para acceso admin
+ */
+
 //Atajo para acceder al menú de admin (Ctrl + Shift + A)
 
 (() => {

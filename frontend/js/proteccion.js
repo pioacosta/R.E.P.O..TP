@@ -1,3 +1,9 @@
+/*
+ * PROTECCION.JS - Middleware de seguridad para páginas
+ * Verifica autenticación y controla acceso
+ * Protege rutas administrativas
+ */
+
 (() => {
   // ===== FUNCIONES AUXILIARES =====
   const showAlert = (type, title, text, confirmText, callback) => {
@@ -45,7 +51,10 @@
 
   document.addEventListener("DOMContentLoaded", () => {
     // ===== PROTECCIÓN 1: DASHBOARD SIN LOGIN ADMIN =====
-    if ((isDashboardPage || isAgregarProductoPage || isEditarProductoPage) && !isAdmin()) {
+    if (
+      (isDashboardPage || isAgregarProductoPage || isEditarProductoPage) &&
+      !isAdmin()
+    ) {
       showAlert(
         "error",
         "Acceso Denegado",

@@ -1,9 +1,15 @@
+/*
+ * ADMIN.JS - Lógica de autenticación de administradores
+ * Maneja el login exclusivo para admins
+ * Control de acceso al panel administrativo
+ */
+
 import { crearProducto, obtenerCategorias } from "./fetch.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const token = localStorage.getItem("adminToken");
-  if(token){
-    window.window.location.href = "./dashboard.html" 
+  if (token) {
+    window.window.location.href = "./dashboard.html";
   }
 
   const form = document.getElementById("productForm");

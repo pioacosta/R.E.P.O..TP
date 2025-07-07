@@ -1,3 +1,9 @@
+/*
+ * TICKET.JS - Lógica del comprobante de compra
+ * Genera y muestra el ticket final de la compra
+ * Maneja la descarga en PDF
+ */
+
 document.addEventListener("DOMContentLoaded", () => {
   document
     .getElementById("downloadPdfBtn")

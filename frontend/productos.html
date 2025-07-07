@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
+  <!-- 
+    PRODUCTOS.HTML - Página del catálogo de productos
+    Muestra productos disponibles, filtros y carrito
+    Para clientes autenticados
+  -->
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Productos | R.E.P.O.</title>
 
-    <!-- Favicon -->
+    <!-- Favicons -->
     <link
       rel="icon"
       type="image/png"
@@ -25,7 +30,7 @@
       href="./assets/img/logo_tema_claro.png"
     />
 
-    <!-- Bootstrap -->
+    <!-- Bootstrap CSS e iconos -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -34,14 +39,18 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
       rel="stylesheet"
     />
+
+    <!-- Estilos personalizados -->
     <link href="./assets/css/styles.css" rel="stylesheet" />
     <link href="./assets/css/dark-mode.css" rel="stylesheet" />
   </head>
 
+  <!-- Página de productos con layout flex vertical -->
   <body class="d-flex flex-column productos-page">
-    <!-- NAVBAR -->
+    <!-- Navbar responsive con logo y menú -->
     <nav class="navbar navbar-expand-md bg-white shadow-sm fixed-top">
       <div class="container">
+        <!-- Logo sin redirección -->
         <div class="navbar-brand fw-bold d-flex align-items-center">
           <img
             id="logoClaro"
@@ -59,6 +68,8 @@
           />
           R.E.P.O.
         </div>
+
+        <!-- Botón hamburguesa para móviles -->
         <button
           class="navbar-toggler"
           type="button"
@@ -70,6 +81,8 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
+
+        <!-- Menú de navegación -->
         <div class="collapse navbar-collapse" id="mainNav">
           <ul class="navbar-nav ms-auto gap-md-2">
             <li class="nav-item">
@@ -85,7 +98,7 @@
             </li>
           </ul>
 
-          <!-- Toggle de modo oscuro -->
+          <!-- Toggle modo oscuro -->
           <button
             id="darkModeToggle"
             class="btn btn-outline-secondary btn-sm ms-3"
@@ -99,12 +112,12 @@
       </div>
     </nav>
 
-    <!-- MAIN -->
+    <!-- Contenido principal -->
     <main
       class="container flex-grow-1"
       style="padding-top: 120px; padding-bottom: 40px"
     >
-      <!-- Título principal mejorado -->
+      <!-- Título de la página -->
       <div class="glass-card p-4 p-md-5 mb-5 mx-auto max-width-700">
         <h1 class="display-5 fw-bold mb-3 text-primary text-center">
           Productos Disponibles
@@ -114,9 +127,10 @@
         </p>
       </div>
 
-      <!-- FILTROS -->
+      <!-- Filtros de productos -->
       <div class="glass-card p-3 p-md-4 mb-4">
         <div class="row g-2 g-md-3">
+          <!-- Buscador -->
           <div class="col-12 col-sm-6 col-md-6">
             <input
               type="text"
@@ -125,6 +139,8 @@
               placeholder="Buscar producto por nombre..."
             />
           </div>
+
+          <!-- Filtro por categoría -->
           <div class="col-6 col-sm-3 col-md-3">
             <select
               id="filtroCategoria"
@@ -133,6 +149,8 @@
               <option value="">Todas las categorías</option>
             </select>
           </div>
+
+          <!-- Filtro por precio -->
           <div class="col-6 col-sm-3 col-md-3">
             <select
               id="filtroPrecio"
@@ -146,9 +164,11 @@
         </div>
       </div>
 
-      <!-- Listado de productos -->
+      <!-- Contenedor donde se cargan los productos -->
       <div id="productosContainer" class="row g-4"></div>
     </main>
+
+    <!-- Footer -->
     <footer
       id="footer"
       class="bg-white shadow-sm text-dark text-center py-4 px-3 mt-5 border-top w-100"
@@ -161,7 +181,8 @@
         >
       </div>
     </footer>
-    <!-- SCRIPTS -->
+
+    <!-- Scripts JS -->
     <script type="module" src="./js/productos.js" defer></script>
     <script src="./js/ui.js" defer></script>
     <script src="./js/proteccion.js" defer></script>

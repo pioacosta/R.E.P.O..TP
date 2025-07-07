@@ -1,3 +1,9 @@
+/*
+ * CARRITO.JS - Lógica del carrito de compras
+ * Maneja productos en el carrito, cantidades y checkout
+ * Procesa la finalización de compras
+ */
+
 import { crearVenta } from "./fetch.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -40,13 +46,6 @@ async function registrarVentas(e) {
   }
 }
 
-// async function finalizarCompra() {
-//   const compra = obtenerCarrito();
-//   console.log(compra);
-
-//   console.log(nombre);
-// }
-
 function guardarCarrito(carrito) {
   sessionStorage.setItem("carrito", JSON.stringify(carrito));
 }
@@ -77,17 +76,37 @@ function renderizarProductos(lista) {
       <div class="card shadow-sm">
         <div class="row g-0 align-items-center">
           <div class="col-12 col-sm-3 col-md-4 text-center p-2 p-sm-3 border-end">
-            <img src="${prod.imagen}" class="img-fluid object-fit-contain mx-auto" style="max-height: 80px;" alt="${prod.nombre}">
+            <img src="${
+              prod.imagen
+            }" class="img-fluid object-fit-contain mx-auto" style="max-height: 80px;" alt="${
+      prod.nombre
+    }">
           </div>
           <div class="col-12 col-sm-9 col-md-8 p-2 p-sm-3">
-            <h5 class="card-title mb-1 text-center text-sm-start">${prod.nombre}</h5>
-            <p class="card-text text-muted mb-1 text-center text-sm-start">${prod.categoria || ""}</p>
-            <p class="card-text fw-bold mb-3 text-center text-sm-start">$ ${parseFloat(prod.precio).toFixed(2)}</p>
+            <h5 class="card-title mb-1 text-center text-sm-start">${
+              prod.nombre
+            }</h5>
+            <p class="card-text text-muted mb-1 text-center text-sm-start">${
+              prod.categoria || ""
+            }</p>
+            <p class="card-text fw-bold mb-3 text-center text-sm-start">$ ${parseFloat(
+              prod.precio
+            ).toFixed(2)}</p>
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-sm-start gap-2">
-              <button class="btn btn-outline-secondary btn-sm btn-disminuir" data-id="${prod.id}">-</button>
-              <input type="number" min="1" max="100" value="${prod.cantidad || 1}" class="form-control form-control-sm text-center cantidad-input" data-id="${prod.id}" style="width: 60px;">
-              <button class="btn btn-outline-secondary btn-sm btn-aumentar" data-id="${prod.id}">+</button>
-              <button class="btn btn-danger btn-sm ms-sm-auto btn-eliminar" data-id="${prod.id}">Eliminar</button>
+              <button class="btn btn-outline-secondary btn-sm btn-disminuir" data-id="${
+                prod.id
+              }">-</button>
+              <input type="number" min="1" max="100" value="${
+                prod.cantidad || 1
+              }" class="form-control form-control-sm text-center cantidad-input" data-id="${
+      prod.id
+    }" style="width: 60px;">
+              <button class="btn btn-outline-secondary btn-sm btn-aumentar" data-id="${
+                prod.id
+              }">+</button>
+              <button class="btn btn-danger btn-sm ms-sm-auto btn-eliminar" data-id="${
+                prod.id
+              }">Eliminar</button>
             </div>
           </div>
         </div>
@@ -96,22 +115,31 @@ function renderizarProductos(lista) {
     contenedor.appendChild(fila);
   });
 
-  // 🔁 Ahora sí: asignar listeners a los botones una vez que están en el DOM
-  contenedor.querySelectorAll(".btn-eliminar").forEach((btn) =>
-    btn.addEventListener("click", () => eliminarDelCarrito(Number(btn.dataset.id)))
-  );
+  // asignar listeners a los botones una vez que están en el DOM
+  contenedor
+    .querySelectorAll(".btn-eliminar")
+    .forEach((btn) =>
+      btn.addEventListener("click", () =>
+        eliminarDelCarrito(Number(btn.dataset.id))
+      )
+    );
 
-  contenedor.querySelectorAll(".btn-aumentar").forEach((btn) =>
-    btn.addEventListener("click", () => aumentarCantidad(Number(btn.dataset.id)))
-  );
+  contenedor
+    .querySelectorAll(".btn-aumentar")
+    .forEach((btn) =>
+      btn.addEventListener("click", () =>
+        aumentarCantidad(Number(btn.dataset.id))
+      )
+    );
 
-  contenedor.querySelectorAll(".btn-disminuir").forEach((btn) =>
-    btn.addEventListener("click", () => disminuirCantidad(Number(btn.dataset.id)))
-  );
+  contenedor
+    .querySelectorAll(".btn-disminuir")
+    .forEach((btn) =>
+      btn.addEventListener("click", () =>
+        disminuirCantidad(Number(btn.dataset.id))
+      )
+    );
 }
-
-
-
 
 function eliminarDelCarrito(id) {
   let carrito = obtenerCarrito();

@@ -1,3 +1,9 @@
+/*
+ * TEMA.JS - Gestión avanzada de temas
+ * Control personalizado de temas claro/oscuro
+ * Funciones exportables para otros módulos
+ */
+
 // Esta función inicializa un botón para alternar entre modo claro y oscuro.
 // Se le puede pasar un ID personalizado del botón; por defecto usa "btnToggleModo".
 export function initThemeToggle(btnId = "btnToggleModo") {

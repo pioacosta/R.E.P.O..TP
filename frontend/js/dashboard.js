@@ -1,3 +1,9 @@
+/*
+ * DASHBOARD.JS - Panel de control administrativo
+ * Gestión de productos, usuarios y estadísticas
+ * Centro de administración del sistema
+ */
+
 import {
   obtenerProductos,
   cambiarEstadoProducto,
@@ -201,11 +207,10 @@ async function manejarCrearUsuario(e) {
     return;
   }
 
-  const nombre = form.nombre.value
+  const nombre = form.nombre.value;
   const email = form.email.value;
   const password = form.password.value;
   const passwordConfirm = form.passwordConfirm.value;
-  
 
   if (password !== passwordConfirm) {
     msgDiv.textContent = "Las contraseñas no coinciden";
@@ -215,7 +220,7 @@ async function manejarCrearUsuario(e) {
   }
 
   try {
-    await crearUsuarioAdmin({ nombre,email, password });
+    await crearUsuarioAdmin({ nombre, email, password });
 
     msgDiv.textContent = "Usuario admin creado correctamente";
     msgDiv.className = "alert alert-success";
@@ -311,7 +316,9 @@ function verificarPermisos() {
     if (crearUsuarioTab) crearUsuarioTab.classList.add("d-none");
     if (crearUsuarioContent) crearUsuarioContent.classList.add("d-none");
 
-    console.log("Usuario sin permisos de root - Ocultando funciones administrativas");
+    console.log(
+      "Usuario sin permisos de root - Ocultando funciones administrativas"
+    );
   } else {
     // Mostrar correctamente removiendo clases
     if (crearUsuarioTab) crearUsuarioTab.classList.remove("d-none");

@@ -1,3 +1,9 @@
+/*
+ * STYLES.CSS - Estilos principales del sistema R.E.P.O.
+ * Contiene toda la lógica visual del frontend
+ * Efectos glassmorphism, responsive design y animaciones
+ */
+
 /* === IMPORTACIONES === */
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Open+Sans&display=swap");
 
@@ -821,10 +827,3 @@ body.admin-page.bg-light {
     padding: 1rem !important;
   }
 }
-
-/* === NOTA: Estilos de modo oscuro movidos a dark-mode.css === */
-/* Para mantener la separación de responsabilidades, todos los estilos de modo oscuro */
-/* han sido centralizados en assets/css/dark-mode.css */
-
-/* === LOGOS Y RESPONSIVE === */
-/* Los estilos para logos de navbar están centralizados en dark-mode.css */

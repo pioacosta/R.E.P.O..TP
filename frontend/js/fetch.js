@@ -1,6 +1,7 @@
-/**
- * Módulo centralizado para todas las operaciones de API
- * Contiene todas las funciones de fetch organizadas por entidad
+/*
+ * FETCH.JS - Módulo centralizado para operaciones de API
+ * Contiene todas las funciones de comunicación con el backend
+ * Usado por todos los demás scripts del frontend
  */
 
 // Configuración base

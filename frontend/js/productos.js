@@ -1,3 +1,9 @@
+/*
+ * PRODUCTOS.JS - Lógica del catálogo de productos
+ * Maneja la carga, filtrado y búsqueda de productos
+ * Gestiona agregar productos al carrito
+ */
+
 import { obtenerCategorias, obtenerProductos } from "./fetch.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -32,9 +38,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     asignarEventosAgregar(); //  Asignar eventos a los botones
 
     // Eventos de búsqueda y filtro
-    document.getElementById("buscador").addEventListener("input", aplicarFiltros);
+    document
+      .getElementById("buscador")
+      .addEventListener("input", aplicarFiltros);
     filtroCategoria.addEventListener("change", aplicarFiltros);
-    document.getElementById("filtroPrecio").addEventListener("change", aplicarFiltros);
+    document
+      .getElementById("filtroPrecio")
+      .addEventListener("change", aplicarFiltros);
   } catch (error) {
     console.error("Error al cargar datos:", error);
     document.getElementById("productosContainer").innerHTML =
@@ -43,7 +53,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 function agregarAlCarrito(id) {
-  const cantidadInput = document.querySelector(`.cantidad-input[data-id="${id}"]`);
+  const cantidadInput = document.querySelector(
+    `.cantidad-input[data-id="${id}"]`
+  );
   const raw = cantidadInput?.value.trim();
   const cantidad = parseInt(raw);
 
@@ -68,7 +80,11 @@ function agregarAlCarrito(id) {
   }
 
   sessionStorage.setItem("carrito", JSON.stringify(carrito));
-  mostrarAlertaProducto(id, `${producto.nombre} (x${cantidad}) agregado`, "success");
+  mostrarAlertaProducto(
+    id,
+    `${producto.nombre} (x${cantidad}) agregado`,
+    "success"
+  );
 }
 
 //  función para asignar los eventos de los botones "Agregar"
@@ -82,7 +98,9 @@ function asignarEventosAgregar() {
 }
 
 function mostrarAlertaProducto(productoId, mensaje, tipo = "success") {
-  const alertaContainer = document.getElementById(`alerta-producto-${productoId}`);
+  const alertaContainer = document.getElementById(
+    `alerta-producto-${productoId}`
+  );
   if (!alertaContainer) return;
 
   const alertaDiv = alertaContainer.querySelector(".alert");
@@ -106,7 +124,8 @@ function mostrarAlertaProducto(productoId, mensaje, tipo = "success") {
   alertaContainer.style.display = "block";
   alertaContainer.style.opacity = "0";
   alertaContainer.style.transform = "translateY(-15px) scale(0.9)";
-  alertaContainer.style.transition = "all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)";
+  alertaContainer.style.transition =
+    "all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)";
   alertaContainer.offsetHeight; // Forzar reflow
   alertaContainer.style.opacity = "1";
   alertaContainer.style.transform = "translateY(0) scale(1)";
@@ -126,27 +145,41 @@ function renderizarProductos(lista) {
   contenedor.innerHTML = "";
 
   if (lista.length === 0) {
-    contenedor.innerHTML = "<p class='text-center'>No se encontraron productos.</p>";
+    contenedor.innerHTML =
+      "<p class='text-center'>No se encontraron productos.</p>";
     return;
   }
 
   lista.forEach((prod) => {
     const col = document.createElement("div");
-    col.className = "col-6 col-sm-4 col-md-3 col-lg-4 col-xl-3 mb-4 producto-card-container";
+    col.className =
+      "col-6 col-sm-4 col-md-3 col-lg-4 col-xl-3 mb-4 producto-card-container";
 
     col.innerHTML = `
       <div class="card h-100 shadow-sm d-flex flex-column position-relative">
-        <img src="${prod.imagen}" class="card-img-top object-fit-contain" style="height: 200px;" alt="${prod.nombre}">
+        <img src="${
+          prod.imagen
+        }" class="card-img-top object-fit-contain" style="height: 200px;" alt="${
+      prod.nombre
+    }">
         <div class="card-body d-flex flex-column">
           <h5 class="card-title">${prod.nombre}</h5>
           <p class="card-text text-muted">${prod.categoria || ""}</p>
-          <p class="card-text fw-bold">$ ${parseFloat(prod.precio).toFixed(2)}</p>
+          <p class="card-text fw-bold">$ ${parseFloat(prod.precio).toFixed(
+            2
+          )}</p>
           <div class="input-group mt-auto">
-            <input type="number" class="cantidad-input" data-id="${prod.id}" value="1" min="1" max="100">
-            <button class="btn btn-success agregar-btn" data-id="${prod.id}">Agregar</button>
+            <input type="number" class="cantidad-input" data-id="${
+              prod.id
+            }" value="1" min="1" max="100">
+            <button class="btn btn-success agregar-btn" data-id="${
+              prod.id
+            }">Agregar</button>
           </div>
         </div>
-        <div id="alerta-producto-${prod.id}" class="position-absolute w-100" style="bottom: -50px; z-index: 10; display: none;">
+        <div id="alerta-producto-${
+          prod.id
+        }" class="position-absolute w-100" style="bottom: -50px; z-index: 10; display: none;">
           <div class="alert alert-success mx-2 mb-0 text-center shadow-sm" style="font-size: 0.9rem; padding: 0.5rem;">
             <strong>¡Producto agregado!</strong>
           </div>
@@ -175,5 +208,5 @@ function aplicarFiltros() {
   }
 
   renderizarProductos(filtrados);
-  asignarEventosAgregar(); 
+  asignarEventosAgregar();
 }

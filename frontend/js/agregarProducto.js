@@ -1,3 +1,9 @@
+/*
+ * AGREGAR_PRODUCTO.JS - Formulario para crear productos
+ * Maneja la creación de nuevos productos en el sistema
+ * Solo para usuarios administradores
+ */
+
 import { obtenerCategorias, crearProducto } from "./fetch.js";
 
 document.addEventListener("DOMContentLoaded", async function () {

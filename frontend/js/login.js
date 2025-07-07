@@ -1,3 +1,9 @@
+/*
+ * LOGIN.JS - Sistema de autenticación general
+ * Maneja login/logout de administradores
+ * Control de sesiones y tokens
+ */
+
 import { loginAdmin, logoutAdmin } from "./fetch.js";
 
 document.addEventListener("DOMContentLoaded", () => {

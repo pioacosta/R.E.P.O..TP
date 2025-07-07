@@ -1,3 +1,9 @@
+/*
+ * UI.JS - Utilidades generales de interfaz
+ * Funciones reutilizables para componentes y animaciones
+ * Helpers para manipulación del DOM
+ */
+
 function crearElemento(tipo, clase, texto) {
   const el = document.createElement(tipo);
   if (clase) el.className = clase;

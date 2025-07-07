@@ -1,6 +1,7 @@
-/**
- * Modo Oscuro - Funcionalidad compartida
- * Para dashboard.html, agregarProducto.html y editarProducto.html
+/*
+ * DARK_MODE.JS - Implementación del modo oscuro
+ * Toggle entre tema claro y oscuro
+ * Guarda preferencias del usuario
  */
 
 // Función para aplicar/quitar el modo oscuro

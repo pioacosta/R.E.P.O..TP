@@ -1,3 +1,9 @@
+/*
+ * EDITAR_PRODUCTO.JS - Formulario para modificar productos
+ * Maneja la edición de productos existentes
+ * Solo para usuarios administradores
+ */
+
 import {
   obtenerProductoPorId,
   obtenerCategorias,
