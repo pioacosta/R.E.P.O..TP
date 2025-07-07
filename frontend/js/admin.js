@@ -1,6 +1,11 @@
 import { crearProducto, obtenerCategorias } from "./fetch.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
+  const token = localStorage.getItem("adminToken");
+  if(token){
+    window.window.location.href = "./dashboard.html" 
+  }
+
   const form = document.getElementById("productForm");
   const msgDiv = document.getElementById("productMsg");
 

@@ -40,10 +40,12 @@
   const isProductosPage = currentPage.endsWith("productos.html");
   const isCarritoPage = currentPage.endsWith("carrito.html");
   const isTicketPage = currentPage.endsWith("ticket.html");
+  const isAgregarProductoPage = currentPage.endsWith("agregarProducto.html");
+  const isEditarProductoPage = currentPage.endsWith("editarProducto.html");
 
   document.addEventListener("DOMContentLoaded", () => {
     // ===== PROTECCIÓN 1: DASHBOARD SIN LOGIN ADMIN =====
-    if (isDashboardPage && !isAdmin()) {
+    if ((isDashboardPage || isAgregarProductoPage || isEditarProductoPage) && !isAdmin()) {
       showAlert(
         "error",
         "Acceso Denegado",

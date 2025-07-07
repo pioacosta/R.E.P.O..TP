@@ -205,6 +205,7 @@ async function manejarCrearUsuario(e) {
   const email = form.email.value;
   const password = form.password.value;
   const passwordConfirm = form.passwordConfirm.value;
+  
 
   if (password !== passwordConfirm) {
     msgDiv.textContent = "Las contraseñas no coinciden";
