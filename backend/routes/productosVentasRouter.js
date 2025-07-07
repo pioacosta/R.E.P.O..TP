@@ -1,11 +1,12 @@
 const express = require("express");
 const router = express.Router();
-
+const manejarErroresValidacion = require("../middlewares/manejarErroresValidacion");
+const validarProductoVenta = require("../middlewares/validarProductoVenta")
 const productosventasControllers = require("../controllers/productoVentaController");
 
 router.get("/", productosventasControllers.listarProductosVentas);
 router.get("/:id", productosventasControllers.obtenerProductoVentaPorId);
-router.post("/", productosventasControllers.crearProductoVenta);
+router.post("/",validarProductoVenta, manejarErroresValidacion, productosventasControllers.crearProductoVenta);
 router.put("/:id", productosventasControllers.modificarProductoVenta);
 router.delete("/:id", productosventasControllers.eliminarProductoVenta);
 

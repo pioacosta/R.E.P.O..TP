@@ -36,7 +36,7 @@ router.put(
 );
 
 // Eliminar un producto
-router.delete("/:id", productoControllers.eliminarProducto);
+router.delete("/:id",verificarToken, permitirRoles("root"), productoControllers.eliminarProducto);
 
 // Baja lógica
 router.patch("/:id/baja",verificarToken, permitirRoles("root","admin"), productoControllers.darDeBajaProducto);
