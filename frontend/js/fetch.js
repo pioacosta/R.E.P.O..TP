@@ -152,6 +152,24 @@ export const crearCategoria = async (nombre) => {
 // =================== VENTAS ===================
 
 /**
+ * Obtiene todas las ventas con sus productos asociados
+ */
+export const obtenerVentas = async () => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/ventas`, {
+      headers: {
+        Authorization: `Bearer ${getAdminToken()}`,
+      },
+    });
+    await handleFetchError(response, "obtener ventas");
+    return await response.json();
+  } catch (error) {
+    console.error("Error al obtener ventas:", error);
+    throw error;
+  }
+};
+
+/**
  * Crea una nueva venta
  */
 export const crearVenta = async (datosVenta) => {

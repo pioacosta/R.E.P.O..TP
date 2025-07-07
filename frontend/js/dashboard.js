@@ -9,9 +9,11 @@ import {
   cambiarEstadoProducto,
   crearUsuarioAdmin,
   crearCategoria,
+  obtenerVentas,
 } from "./fetch.js";
 
 let productos = [];
+let ventas = [];
 
 document.addEventListener("DOMContentLoaded", async () => {
   productos = await cargarProductos();
@@ -327,3 +329,174 @@ function verificarPermisos() {
     console.log("Usuario root - Mostrando todas las funciones administrativas");
   }
 }
+
+// =================== GESTIÓN DE VENTAS ===================
+
+/**
+ * Carga y muestra todas las ventas
+ */
+async function cargarVentas() {
+  try {
+    const container = document.getElementById("listarVentas");
+
+    // Mostrar loading
+    container.innerHTML = `
+      <div class="text-center py-5">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Cargando ventas...</span>
+        </div>
+        <p class="mt-2 text-muted">Cargando historial de ventas...</p>
+      </div>
+    `;
+
+    ventas = await obtenerVentas();
+    mostrarVentas(ventas);
+    actualizarContadorVentas(ventas.length);
+  } catch (error) {
+    console.error("Error al cargar ventas:", error);
+    document.getElementById("listarVentas").innerHTML = `
+      <div class="alert alert-danger">
+        <i class="bi bi-exclamation-triangle"></i>
+        Error al cargar las ventas. Por favor, intenta nuevamente.
+      </div>
+    `;
+  }
+}
+
+/**
+ * Muestra las ventas en el contenedor
+ */
+function mostrarVentas(ventasArray) {
+  const container = document.getElementById("listarVentas");
+
+  if (!ventasArray || ventasArray.length === 0) {
+    container.innerHTML = `
+      <div class="text-center py-5">
+        <i class="bi bi-receipt text-muted" style="font-size: 3rem;"></i>
+        <h5 class="mt-3 text-muted">No hay ventas registradas</h5>
+        <p class="text-muted">Las ventas aparecerán aquí cuando se realicen compras.</p>
+      </div>
+    `;
+    return;
+  }
+
+  container.innerHTML = ventasArray
+    .map(
+      (venta) => `
+    <div class="card mb-3">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <div>
+          <h6 class="mb-0 text-body">
+            <i class="bi bi-receipt me-2"></i>
+            Venta #${venta.id}
+          </h6>
+          <small class="text-muted">
+            <i class="bi bi-person me-1"></i>${venta.usuario_nombre}
+            <i class="bi bi-calendar ms-3 me-1"></i>${new Date(
+              venta.fecha
+            ).toLocaleDateString("es-AR")}
+            <i class="bi bi-clock ms-2 me-1"></i>${new Date(
+              venta.fecha
+            ).toLocaleTimeString("es-AR")}
+          </small>
+        </div>
+        <div class="text-end">
+          <span class="badge bg-success fs-6">$${venta.total}</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <h6 class="card-subtitle mb-2 text-muted">Productos comprados:</h6>
+        <div class="row g-2">
+          ${
+            venta.ProductoVentas?.map(
+              (pv) => `
+            <div class="col-md-6">
+              <div class="d-flex align-items-center p-2 bg-light-subtle rounded">
+                <div class="flex-grow-1">
+                  <strong class="text-body">${
+                    pv.Producto?.nombre || "Producto no encontrado"
+                  }</strong>
+                  <br>
+                  <small class="text-muted">
+                    ${pv.cantidad} × $${pv.precio_unitario} = $${pv.subtotal}
+                  </small>
+                </div>
+              </div>
+            </div>
+          `
+            ).join("") || '<p class="text-muted">No hay productos asociados</p>'
+          }
+        </div>
+      </div>
+    </div>
+  `
+    )
+    .join("");
+}
+
+/**
+ * Actualiza el contador de ventas
+ */
+function actualizarContadorVentas(cantidad) {
+  const contador = document.getElementById("contadorVentas");
+  if (contador) {
+    contador.textContent = cantidad;
+  }
+}
+
+/**
+ * Filtra las ventas según los criterios seleccionados
+ */
+function filtrarVentas() {
+  const filtroFecha = document.getElementById("filtroFecha").value;
+  const filtroUsuario = document
+    .getElementById("filtroUsuario")
+    .value.toLowerCase();
+
+  let ventasFiltradas = [...ventas];
+
+  // Filtrar por fecha
+  if (filtroFecha) {
+    ventasFiltradas = ventasFiltradas.filter((venta) => {
+      const fechaVenta = new Date(venta.fecha).toISOString().split("T")[0];
+      return fechaVenta === filtroFecha;
+    });
+  }
+
+  // Filtrar por usuario
+  if (filtroUsuario) {
+    ventasFiltradas = ventasFiltradas.filter((venta) =>
+      venta.usuario_nombre.toLowerCase().includes(filtroUsuario)
+    );
+  }
+
+  mostrarVentas(ventasFiltradas);
+  actualizarContadorVentas(ventasFiltradas.length);
+}
+
+/**
+ * Limpia todos los filtros
+ */
+function limpiarFiltros() {
+  document.getElementById("filtroFecha").value = "";
+  document.getElementById("filtroUsuario").value = "";
+  mostrarVentas(ventas);
+  actualizarContadorVentas(ventas.length);
+}
+
+// Hacer las funciones accesibles globalmente
+window.filtrarVentas = filtrarVentas;
+window.limpiarFiltros = limpiarFiltros;
+
+// Event listener para el tab de ventas
+document.addEventListener("DOMContentLoaded", () => {
+  const ventasTab = document.getElementById("detalles-ventas-tab");
+  if (ventasTab) {
+    ventasTab.addEventListener("click", () => {
+      // Cargar ventas solo cuando se hace click en el tab
+      if (!ventas.length) {
+        cargarVentas();
+      }
+    });
+  }
+});

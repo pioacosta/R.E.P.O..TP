@@ -124,7 +124,16 @@ body.dark-mode .form-select:focus {
 }
 
 body.dark-mode .form-label {
-  color: var(--dark-text);
+  color: var(--dark-text) !important;
+}
+
+/* Labels específicos con mayor especificidad */
+body.dark-mode .form-label.text-body {
+  color: var(--dark-text) !important;
+}
+
+body.dark-mode label {
+  color: var(--dark-text) !important;
 }
 
 /* Glass inputs específicos */
@@ -143,6 +152,17 @@ body.dark-mode .glass-input:focus {
 body.dark-mode .glass-input::placeholder {
   color: var(--dark-text) !important;
   opacity: 0.8;
+}
+
+/* Placeholders en modo oscuro para todos los inputs */
+body.dark-mode .form-control::placeholder {
+  color: var(--dark-text) !important;
+  opacity: 0.7;
+}
+
+body.dark-mode input::placeholder {
+  color: var(--dark-text) !important;
+  opacity: 0.7;
 }
 
 /* === TABLAS MODO OSCURO === */
