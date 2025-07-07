@@ -11,6 +11,7 @@ const { verificarToken, permitirRoles } = require("../middlewares/authMiddleware
 
 // Listar productos
 router.get("/", productoControllers.listarProductos);
+router.get("/pagina", productoControllers.productospaginados);
 
 // Obtener un producto por ID
 router.get("/:id", productoControllers.obtenerProductoPorId);

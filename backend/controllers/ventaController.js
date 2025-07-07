@@ -100,10 +100,37 @@ const eliminarVenta = async (req, res) => {
   }
 };
 
+const obtenerDetalleVenta = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const venta = await Venta.findByPk(id, {
+      include: {
+        model: Producto,
+        as: 'productos',
+        through: {
+          attributes: ['cantidad', 'precio_unitario'],
+        },
+      },
+    });
+
+    if (!venta) {
+      return res.status(404).json({ mensaje: 'Venta no encontrada' });
+    }
+
+    res.json(venta);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ mensaje: 'Error al obtener el detalle de la venta' });
+  }
+};
+
+
 module.exports = {
   listarVentas,
   obtenerVentaPorId,
   crearVenta,
   modificarVenta,
   eliminarVenta,
+  obtenerDetalleVenta
 };
