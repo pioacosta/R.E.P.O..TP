@@ -11,7 +11,10 @@ const obtenerUsuarioPorId = async (req, res) => {
   res.json(usuario);
 };
 
+
+
 const crearUsuario = async (req, res) => {
+  const rol = req.body.rol || "admin"
   try {
     // Solo un admin puede crear otro admin
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
@@ -19,7 +22,7 @@ const crearUsuario = async (req, res) => {
       nombre: req.body.nombre,
       email: req.body.email,
       password: hashedPassword,
-      rol: "admin",
+      rol: rol,
     });
     res.status(201).json(nuevoUsuario);
   } catch (error) {
