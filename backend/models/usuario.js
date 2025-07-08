@@ -1,6 +1,19 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/db");
 
+/**
+ * Modelo Sequelize para la tabla "usuarios".
+ * Campos:
+ * - id: entero, clave primaria, autoincremental.
+ * - nombre: cadena, obligatorio.
+ * - email: cadena, obligatorio, único.
+ * - password: cadena, obligatorio (se debe almacenar hasheado).
+ * - rol: cadena, obligatorio (ejemplo: "admin", "usuario").
+ * - creado_en: fecha, fecha de creación (default: ahora).
+ * Opciones:
+ * - tableName: nombre explícito de la tabla.
+ * - timestamps: desactivado (no crea createdAt ni updatedAt automáticos).
+ */
 const Usuario = sequelize.define(
   "Usuario",
   {

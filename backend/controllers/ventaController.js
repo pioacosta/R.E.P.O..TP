@@ -2,15 +2,38 @@ const Venta = require("../models/venta");
 const ProductoVenta = require("../models/productoVenta");
 const Producto = require("../models/producto");
 const sequelize = require("../config/db");
+
+/**
+ * Obtiene y devuelve todas las ventas registradas.
+ * @param {Object} req - Objeto petición HTTP.
+ * @param {Object} res - Objeto respuesta HTTP.
+ */
 const listarVentas = async (req, res) => {
   const ventas = await Venta.findAll();
   res.json(ventas);
 };
 
+/**
+ * Obtiene y devuelve una venta por su ID.
+ * @param {Object} req - Objeto petición HTTP.
+ * @param {Object} req.params - Parámetros de ruta.
+ * @param {string} req.params.id - ID de la venta a obtener.
+ * @param {Object} res - Objeto respuesta HTTP.
+ */
 const obtenerVentaPorId = async (req, res) => {
   const venta = await Venta.findByPk(req.params.id);
   res.json(venta);
 };
+
+/**
+ * Crea una nueva venta con los datos del cliente y los productos asociados.
+ * Valida stock disponible, actualiza stock y registra detalles de venta en transacción.
+ * @param {Object} req - Objeto petición HTTP.
+ * @param {Object} req.body - Datos de la venta (cliente_nombre y array de productos).
+ * @param {string} req.body.cliente_nombre - Nombre del cliente.
+ * @param {Array} req.body.productos - Lista de productos con {producto_id, cantidad}.
+ * @param {Object} res - Objeto respuesta HTTP.
+ */
 
 const crearVenta = async (req, res) => {
   const { cliente_nombre, productos } = req.body;
@@ -70,6 +93,14 @@ const crearVenta = async (req, res) => {
   }
 };
 
+/**
+ * Modifica una venta existente según su ID con nuevos datos.
+ * @param {Object} req - Objeto petición HTTP.
+ * @param {Object} req.params - Parámetros de ruta.
+ * @param {string} req.params.id - ID de la venta a modificar.
+ * @param {Object} req.body - Nuevos datos para la venta.
+ * @param {Object} res - Objeto respuesta HTTP.
+ */
 const modificarVenta = async (req, res) => {
   try {
     const venta = await Venta.findByPk(req.params.id);
@@ -87,6 +118,14 @@ const modificarVenta = async (req, res) => {
   }
 };
 
+
+/**
+ * Elimina una venta por su ID.
+ * @param {Object} req - Objeto petición HTTP.
+ * @param {Object} req.params - Parámetros de ruta.
+ * @param {string} req.params.id - ID de la venta a eliminar.
+ * @param {Object} res - Objeto respuesta HTTP.
+ */
 const eliminarVenta = async (req, res) => {
   try {
     const venta = await Venta.findByPk(req.params.id);
@@ -100,6 +139,14 @@ const eliminarVenta = async (req, res) => {
   }
 };
 
+
+/**
+ * Obtiene el detalle completo de una venta por su ID, incluyendo productos con cantidad y precio unitario.
+ * @param {Object} req - Objeto petición HTTP.
+ * @param {Object} req.params - Parámetros de ruta.
+ * @param {string} req.params.id - ID de la venta a detallar.
+ * @param {Object} res - Objeto respuesta HTTP.
+ */
 const obtenerDetalleVenta = async (req, res) => {
   const { id } = req.params;
 
@@ -124,6 +171,12 @@ const obtenerDetalleVenta = async (req, res) => {
     res.status(500).json({ mensaje: 'Error al obtener el detalle de la venta' });
   }
 };
+
+/**
+ * Obtiene el detalle completo de todas las ventas, incluyendo productos con cantidad y precio unitario.
+ * @param {Object} req - Objeto petición HTTP.
+ * @param {Object} res - Objeto respuesta HTTP.
+ */
 const obtenerDetallesVentas = async (req, res) => {
   const { id } = req.params;
 

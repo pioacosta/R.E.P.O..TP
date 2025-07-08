@@ -9,6 +9,29 @@ const productoControllers = require("../controllers/productoController");
 
 const { verificarToken, permitirRoles } = require("../middlewares/authMiddleware");
 
+
+/**
+ * Rutas para la gestión de productos.
+ * 
+ * GET    /              - Listar todos los productos.
+ * GET    /pagina        - Listar productos paginados.
+ * GET    /:id           - Obtener un producto por su ID.
+ * POST   /crear         - Crear un producto (requiere token, roles root/admin, validación y subida de imagen).
+ * PUT    /:id           - Modificar un producto (requiere token, roles root/admin, validación y posible nueva imagen).
+ * DELETE /:id           - Eliminar un producto (requiere token y rol root).
+ * PATCH  /:id/baja      - Dar de baja lógica a un producto (requiere token, roles root/admin).
+ * PATCH  /:id/alta      - Dar de alta lógica a un producto (no requiere autenticación).
+ * 
+ * Middlewares usados:
+ * - verificarToken: valida JWT.
+ * - permitirRoles: controla acceso por rol.
+ * - upload.single("imagen"): maneja subida de imagen.
+ * - validarProducto: valida datos del producto.
+ * - manejarErroresValidacion: maneja errores de validación.
+ */
+
+
+
 // Listar productos
 router.get("/", productoControllers.listarProductos);
 router.get("/pagina", productoControllers.productospaginados);

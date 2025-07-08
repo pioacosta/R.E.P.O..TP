@@ -2,11 +2,23 @@ const Producto = require("../models/producto");
 const path = require("path");
 const fs = require("fs");
 
+/**
+ * Obtiene y devuelve la lista completa de productos.
+ * @param {Object} req - Objeto petición HTTP.
+ * @param {Object} res - Objeto respuesta HTTP.
+ */
 const listarProductos = async (req, res) => {
   const productos = await Producto.findAll();
   res.json(productos);
 };
 
+/**
+ * Obtiene productos activos paginados según parámetros query (page y limit).
+ * Devuelve productos, página actual, total de páginas y total de productos.
+ * @param {Object} req - Objeto petición HTTP.
+ * @param {Object} req.query - Parámetros query con page y limit opcionales.
+ * @param {Object} res - Objeto respuesta HTTP.
+ */
 const productospaginados = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
@@ -14,9 +26,6 @@ const productospaginados = async (req, res) => {
     const offset = (page - 1) * limit;
 
     const { count, rows } = await Producto.findAndCountAll({
-      where: {
-        activo: true,
-      },
       limit: limit,
       offset: offset,
     });
@@ -38,11 +47,26 @@ const productospaginados = async (req, res) => {
   }
 };
 
+
+/**
+ * Obtiene un producto específico por su ID.
+ * @param {Object} req - Objeto petición HTTP.
+ * @param {Object} req.params - Parámetros de ruta.
+ * @param {string} req.params.id - ID del producto a obtener.
+ * @param {Object} res - Objeto respuesta HTTP.
+ */
 const obtenerProductoPorId = async (req, res) => {
   const producto = await Producto.findByPk(req.params.id);
   res.json(producto);
 };
 
+/**
+ * Crea un nuevo producto con los datos recibidos y la imagen subida.
+ * @param {Object} req - Objeto petición HTTP.
+ * @param {Object} req.body - Datos del producto (nombre, descripción, precio, categoria_id, stock).
+ * @param {Object} req.file - Archivo de imagen subido.
+ * @param {Object} res - Objeto respuesta HTTP.
+ */
 const crearProducto = async (req, res) => {
   try {
     const img = req.file;
@@ -71,6 +95,16 @@ const crearProducto = async (req, res) => {
   }
 };
 
+/**
+ * Modifica un producto existente identificado por ID.
+ * Actualiza datos y reemplaza imagen si se sube una nueva (elimina la anterior).
+ * @param {Object} req - Objeto petición HTTP.
+ * @param {Object} req.params - Parámetros de ruta.
+ * @param {string} req.params.id - ID del producto a modificar.
+ * @param {Object} req.body - Nuevos datos del producto.
+ * @param {Object} [req.file] - Archivo de imagen nuevo opcional.
+ * @param {Object} res - Objeto respuesta HTTP.
+ */
 const modificarProducto = async (req, res) => {
   try {
     const producto = await Producto.findByPk(req.params.id);
@@ -110,6 +144,14 @@ const modificarProducto = async (req, res) => {
   }
 };
 
+
+/**
+ * Elimina un producto por su ID.
+ * @param {Object} req - Objeto petición HTTP.
+ * @param {Object} req.params - Parámetros de ruta.
+ * @param {string} req.params.id - ID del producto a eliminar.
+ * @param {Object} res - Objeto respuesta HTTP.
+ */
 const eliminarProducto = async (req, res) => {
   try {
     const producto = await Producto.findByPk(req.params.id);
@@ -124,6 +166,14 @@ const eliminarProducto = async (req, res) => {
   }
 };
 
+
+/**
+ * Cambia el estado activo/inactivo de un producto (dar de baja o activar).
+ * @param {Object} req - Objeto petición HTTP.
+ * @param {Object} req.params - Parámetros de ruta.
+ * @param {string} req.params.id - ID del producto a modificar el estado.
+ * @param {Object} res - Objeto respuesta HTTP.
+ */
 const darDeBajaProducto = async (req, res) => {
   try {
     const producto = await Producto.findByPk(req.params.id);
@@ -140,6 +190,14 @@ const darDeBajaProducto = async (req, res) => {
   }
 };
 
+
+/**
+ * Da de alta (activa) un producto.
+ * @param {Object} req - Objeto petición HTTP.
+ * @param {Object} req.params - Parámetros de ruta.
+ * @param {string} req.params.id - ID del producto a activar.
+ * @param {Object} res - Objeto respuesta HTTP.
+ */
 const darDeAltaProducto = async (req, res) => {
   try {
     const producto = await Producto.findByPk(req.params.id);

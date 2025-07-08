@@ -1,6 +1,22 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/db");
 
+/**
+ * Modelo Sequelize para la tabla "productos".
+ * Campos:
+ * - id: entero, clave primaria, autoincremental.
+ * - nombre: cadena, obligatorio.
+ * - descripcion: texto, opcional.
+ * - precio: decimal, obligatorio.
+ * - imagen: cadena, obligatorio (URL o ruta de imagen).
+ * - stock: entero, obligatorio (cantidad disponible).
+ * - categoria_id: entero, obligatorio, clave foránea a "categorias".
+ * - activo: booleano, indica si el producto está activo (default: true).
+ * - creado_en: fecha, fecha de creación (default: ahora).
+ * Opciones:
+ * - tableName: nombre explícito de la tabla.
+ * - timestamps: desactivado (no crea createdAt ni updatedAt automáticos).
+ */
 const Producto = sequelize.define(
   "Producto",
   {

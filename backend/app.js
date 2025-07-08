@@ -2,7 +2,34 @@ const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
 
-
+/**
+ * Configuración principal del servidor Express.
+ * 
+ * Middlewares:
+ * - cors: para habilitar CORS.
+ * - express.json: para parsear JSON en requests.
+ * - express.static: sirve archivos estáticos del frontend y carpeta "storage".
+ * 
+ * Rutas montadas:
+ * - /usuarios         -> usuariosRouter
+ * - /categorias       -> categoriaRouter
+ * - /productos        -> productosRouter
+ * - /ventas           -> ventasRouter
+ * - /productosVentas  -> productosVentasRouter
+ * - /auth             -> authRoutes
+ * - /img              -> sirve imágenes estáticas desde "storage/img"
+ * 
+ * Manejo de rutas no encontradas:
+ * - Devuelve 404 con mensaje "Página no encontrada".
+ * 
+ * Base de datos:
+ * - Sincroniza modelos Sequelize con la BD (alter true).
+ * - Crea categorías por defecto si no existen ("Limpieza", "Cuidado personal").
+ * 
+ * Servidor:
+ * - Escucha en puerto definido por env o 3000.
+ * - Muestra URL al iniciar.
+ */
 
 const app = express();
 app.use(cors());

@@ -1,5 +1,13 @@
 const { body } = require("express-validator");
 
+/**
+ * Reglas de validación para crear o modificar un productoVenta:
+ * - "producto_id": debe estar presente y no estar vacío.
+ * - "venta_id": debe estar presente y no estar vacío.
+ * - "cantidad": debe ser un entero mayor o igual a 1.
+ * - "precio_unitario": debe ser un número decimal mayor a 0.
+ * Cada regla incluye un mensaje personalizado para cuando la validación falla.
+ */
 module.exports = [
   body("producto_id")
     .notEmpty()

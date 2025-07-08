@@ -1,6 +1,17 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/db");
 
+/**
+ * Modelo Sequelize para la tabla "ventas".
+ * Campos:
+ * - id: entero, clave primaria, autoincremental.
+ * - cliente_nombre: cadena, obligatorio (nombre del cliente).
+ * - fecha: fecha, fecha de la venta (default: ahora).
+ * - total: decimal, total de la venta.
+ * Opciones:
+ * - tableName: nombre explícito de la tabla.
+ * - timestamps: desactivado (no crea createdAt ni updatedAt automáticos).
+ */
 const Venta = sequelize.define("Venta", {
   id: {
     //datos de id
