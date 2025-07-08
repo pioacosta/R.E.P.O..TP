@@ -36,6 +36,25 @@ export const obtenerProductos = async () => {
 };
 
 /**
+ * Obtiene todos los productos paginados
+ */
+
+export const obtenerProductosPaginados = async (pagina = 1, limite = 4) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/productos/pagina?page=${pagina}&limit=${limite}`);
+    if (!response.ok) {
+      throw new Error('No se pudo obtener los productos');
+    }
+    const data = await response.json();
+    console.log("Productos paginados:", data);
+    return data;
+  } catch (error) {
+    console.error("Error al obtener productos paginados:", error);
+  }
+};
+
+
+/**
  * Obtiene un producto por ID
  */
 export const obtenerProductoPorId = async (id) => {
@@ -156,7 +175,7 @@ export const crearCategoria = async (nombre) => {
  */
 export const obtenerVentas = async () => {
   try {
-    const response = await fetch(`${API_BASE_URL}/ventas`, {
+    const response = await fetch(`${API_BASE_URL}/ventas/detalles`, {
       headers: {
         Authorization: `Bearer ${getAdminToken()}`,
       },

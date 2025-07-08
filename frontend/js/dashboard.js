@@ -10,14 +10,18 @@ import {
   crearUsuarioAdmin,
   crearCategoria,
   obtenerVentas,
+  obtenerProductosPaginados
 } from "./fetch.js";
 
 let productos = [];
 let ventas = [];
+let paginaActual = 1;
+const limitePorPagina = 4;
+let totalPaginas = 1;
+
 
 document.addEventListener("DOMContentLoaded", async () => {
   productos = await cargarProductos();
-  renderizarProductos(productos);
 
   const token = localStorage.getItem("adminToken");
   const logoutBtn = document.getElementById("logoutBtn");
@@ -36,13 +40,46 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 const cargarProductos = async () => {
   try {
-    return await obtenerProductos();
+    const data = await obtenerProductosPaginados(paginaActual, limitePorPagina);
+    if (!data || !data.productos) return;
+
+    renderizarProductos(data.productos);
+
+    // Actualiza la paginación 
+    paginaActual = data.paginaActual;
+    totalPaginas = data.totalPaginas;
+
+    renderizarBotonesPaginacion();
+
   } catch (error) {
     console.error("Error al cargar productos:", error);
-    return [];
   }
 };
+function renderizarBotonesPaginacion() {
+  const contenedor = document.getElementById("paginacion");
+  contenedor.innerHTML = "";
 
+  const btnAnterior = document.createElement("button");
+  btnAnterior.textContent = "⬅ Anterior";
+  btnAnterior.className = "btn btn-outline-primary mx-2";
+  btnAnterior.disabled = paginaActual === 1;
+  btnAnterior.addEventListener("click", () => {
+    paginaActual--;
+    cargarProductos();
+  });
+
+  const btnSiguiente = document.createElement("button");
+  btnSiguiente.textContent = "Siguiente ➡";
+  btnSiguiente.className = "btn btn-outline-primary mx-2";
+  btnSiguiente.disabled = paginaActual === totalPaginas;
+  btnSiguiente.addEventListener("click", () => {
+    paginaActual++;
+    cargarProductos();
+  });
+
+  contenedor.appendChild(btnAnterior);
+  contenedor.appendChild(btnSiguiente);
+}
 function renderizarProductos(lista) {
   const productosSection = document.getElementById("listarProductos");
   productosSection.innerHTML = "";
@@ -380,9 +417,9 @@ function mostrarVentas(ventasArray) {
     return;
   }
 
-  container.innerHTML = ventasArray
-    .map(
-      (venta) => `
+container.innerHTML = ventasArray
+  .map(
+    (venta) => `
     <div class="card mb-3">
       <div class="card-header d-flex justify-content-between align-items-center">
         <div>
@@ -391,7 +428,7 @@ function mostrarVentas(ventasArray) {
             Venta #${venta.id}
           </h6>
           <small class="text-muted">
-            <i class="bi bi-person me-1"></i>${venta.usuario_nombre}
+            <i class="bi bi-person me-1"></i>${venta.cliente_nombre}
             <i class="bi bi-calendar ms-3 me-1"></i>${new Date(
               venta.fecha
             ).toLocaleDateString("es-AR")}
@@ -408,30 +445,33 @@ function mostrarVentas(ventasArray) {
         <h6 class="card-subtitle mb-2 text-muted">Productos comprados:</h6>
         <div class="row g-2">
           ${
-            venta.ProductoVentas?.map(
-              (pv) => `
+            venta.productos?.length
+              ? venta.productos
+                  .map(
+                    (producto) => `
             <div class="col-md-6">
-              <div class="d-flex align-items-center p-2 bg-light-subtle rounded">
-                <div class="flex-grow-1">
-                  <strong class="text-body">${
-                    pv.Producto?.nombre || "Producto no encontrado"
-                  }</strong>
-                  <br>
-                  <small class="text-muted">
-                    ${pv.cantidad} × $${pv.precio_unitario} = $${pv.subtotal}
-                  </small>
-                </div>
+              <div class="d-flex align-items-center p-2 rounded detalle-producto border border-secondary shadow-sm">
+<div class="detalle-producto">
+  <strong>${producto.nombre}</strong>
+  <br>
+  <small>
+    ${producto.productoVenta.cantidad} × $${producto.productoVenta.precio_unitario} = $${producto.productoVenta.cantidad * producto.productoVenta.precio_unitario}
+  </small>
+</div>
               </div>
             </div>
           `
-            ).join("") || '<p class="text-muted">No hay productos asociados</p>'
+                  )
+                  .join("")
+              : '<p class="text-muted">No hay productos asociados</p>'
           }
         </div>
       </div>
     </div>
   `
-    )
-    .join("");
+  )
+  .join("");
+
 }
 
 /**
@@ -451,7 +491,8 @@ function filtrarVentas() {
   const filtroFecha = document.getElementById("filtroFecha").value;
   const filtroUsuario = document
     .getElementById("filtroUsuario")
-    .value.toLowerCase();
+    .value.toLowerCase()
+    .trim();
 
   let ventasFiltradas = [...ventas];
 
@@ -463,10 +504,10 @@ function filtrarVentas() {
     });
   }
 
-  // Filtrar por usuario
+  // Filtrar por nombre del cliente (antes decía usuario_nombre y eso no existe)
   if (filtroUsuario) {
     ventasFiltradas = ventasFiltradas.filter((venta) =>
-      venta.usuario_nombre.toLowerCase().includes(filtroUsuario)
+      venta.cliente_nombre.toLowerCase().includes(filtroUsuario)
     );
   }
 
