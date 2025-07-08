@@ -37,24 +37,32 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Configurar event listeners para formularios
   configurarEventListeners();
 });
-
+/**
+ * Carga los productos de la página actual y actualiza la vista con la paginación.
+ * Llama a la función que obtiene los productos, renderiza la lista y los botones de paginación.
+ */
 const cargarProductos = async () => {
   try {
     const data = await obtenerProductosPaginados(paginaActual, limitePorPagina);
-    if (!data || !data.productos) return;
+    if (!data || !data.productos) return [];
 
     renderizarProductos(data.productos);
 
-    // Actualiza la paginación 
     paginaActual = data.paginaActual;
     totalPaginas = data.totalPaginas;
 
     renderizarBotonesPaginacion();
 
+    return data.productos;
   } catch (error) {
     console.error("Error al cargar productos:", error);
+    return [];
   }
 };
+/**
+ * Renderiza los botones "Anterior" y "Siguiente" para navegar entre páginas.
+ * Los botones se deshabilitan si estamos en la primera o última página.
+ */
 function renderizarBotonesPaginacion() {
   const contenedor = document.getElementById("paginacion");
   contenedor.innerHTML = "";
@@ -63,23 +71,25 @@ function renderizarBotonesPaginacion() {
   btnAnterior.textContent = "⬅ Anterior";
   btnAnterior.className = "btn btn-outline-primary mx-2";
   btnAnterior.disabled = paginaActual === 1;
-  btnAnterior.addEventListener("click", () => {
+  btnAnterior.addEventListener("click", async () => {
     paginaActual--;
-    cargarProductos();
+    productos = await cargarProductos();
   });
 
   const btnSiguiente = document.createElement("button");
   btnSiguiente.textContent = "Siguiente ➡";
   btnSiguiente.className = "btn btn-outline-primary mx-2";
   btnSiguiente.disabled = paginaActual === totalPaginas;
-  btnSiguiente.addEventListener("click", () => {
+  btnSiguiente.addEventListener("click", async () => {
     paginaActual++;
-    cargarProductos();
+    productos = await cargarProductos();
   });
 
   contenedor.appendChild(btnAnterior);
   contenedor.appendChild(btnSiguiente);
 }
+
+
 function renderizarProductos(lista) {
   const productosSection = document.getElementById("listarProductos");
   productosSection.innerHTML = "";
@@ -496,15 +506,15 @@ function filtrarVentas() {
 
   let ventasFiltradas = [...ventas];
 
-  // Filtrar por fecha
+  // Filtrar por fecha (usando hora local)
   if (filtroFecha) {
     ventasFiltradas = ventasFiltradas.filter((venta) => {
-      const fechaVenta = new Date(venta.fecha).toISOString().split("T")[0];
+      const fechaVenta = new Date(venta.fecha).toLocaleDateString("sv-SE"); // Formato YYYY-MM-DD
       return fechaVenta === filtroFecha;
     });
   }
 
-  // Filtrar por nombre del cliente (antes decía usuario_nombre y eso no existe)
+  // Filtrar por nombre del cliente
   if (filtroUsuario) {
     ventasFiltradas = ventasFiltradas.filter((venta) =>
       venta.cliente_nombre.toLowerCase().includes(filtroUsuario)
