@@ -68,17 +68,76 @@ app.use((req, res) => {
 const sequelize = require("./config/db");
 require("./models");
 
-const { Categoria } = require("./models");
+const { Categoria, Producto, Usuario } = require("./models");
+const bcrypt = require("bcryptjs");
 
 sequelize.sync({ alter: true }).then(async () => {
   console.log("🔄 Base de datos sincronizada con Sequelize.");
 
-  // Crear categorías por defecto si no existen
-  const categoriasPorDefecto = ["Limpieza", "Cuidado personal"];
-  for (const nombre of categoriasPorDefecto) {
-    await Categoria.findOrCreate({ where: { nombre } });
+
+const categoriasPorDefecto = ["Limpieza", "Cuidado personal"];
+for (const nombre of categoriasPorDefecto) {
+  await Categoria.findOrCreate({ where: { nombre } });
+}
+
+
+// Crear productos si no existen
+const cantidadProductos = await Producto.count();
+  if (cantidadProductos === 0) {
+    const limpieza = await Categoria.findOne({ where: { nombre: "Limpieza" } });
+    const cuidado = await Categoria.findOne({ where: { nombre: "Cuidado personal" } });
+
+    await Producto.bulkCreate([
+      {
+        nombre: "Desinfectante cif",
+        descripcion: "Para una limpieza profunda en toda la casa.",
+        precio: 450.00,
+        imagen: "http://localhost:3000/storage/img/desinfectante.png",
+        stock: 30,
+        categoria_id: limpieza.id,
+      },
+      {
+        nombre: "Shampoo Nutritivo",
+        descripcion: "Con vitamina E para cabello seco.",
+        precio: 750.50,
+        imagen: "http://localhost:3000/storage/img/shampoo.png",
+        stock: 20,
+        categoria_id: cuidado.id,
+      },
+      {
+        nombre: "Jabón Líquido Antibacterial",
+        descripcion: "Elimina el 99.9% de las bacterias.",
+        precio: 520.00,
+        imagen: "http://localhost:3000/storage/img/jabon_liquido.png",
+        stock: 40,
+        categoria_id: cuidado.id,
+      },
+      {
+        nombre: "Cepillo de Dientes",
+        descripcion: "Ideal para los dientes.",
+        precio: 300.00,
+        imagen: "http://localhost:3000/storage/img/cepillo.png",
+        stock: 25,
+        categoria_id: limpieza.id,
+      },
+    ]);
+
+    console.log("🛒 Productos precargados exitosamente.");
   }
 
+// Crear usuario root si no hay usuarios
+const cantidadUsuarios = await Usuario.count();
+if (cantidadUsuarios === 0) {
+  const passwordHash = await bcrypt.hash("root123", 10);
+  await Usuario.create({
+    nombre: "root",
+    email: "root@root.com",
+    password: passwordHash,
+    rol: "root",
+  });
+  console.log("👤 Usuario root creado exitosamente.");
+}
+  
   const PORT = process.env.PORT || 3000;
   app.listen(PORT, () => {
     console.log(`🚀 Servidor Express corriendo en http://localhost:${PORT}`);
