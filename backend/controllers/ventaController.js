@@ -124,6 +124,30 @@ const obtenerDetalleVenta = async (req, res) => {
     res.status(500).json({ mensaje: 'Error al obtener el detalle de la venta' });
   }
 };
+const obtenerDetallesVentas = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const venta = await Venta.findAll( {
+      include: {
+        model: Producto,
+        as: 'productos',
+        through: {
+          attributes: ['cantidad', 'precio_unitario'],
+        },
+      },
+    });
+
+    if (!venta) {
+      return res.status(404).json({ mensaje: 'Venta no encontrada' });
+    }
+
+    res.json(venta);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ mensaje: 'Error al obtener el detalle de la venta' });
+  }
+};
 
 
 module.exports = {
@@ -132,5 +156,6 @@ module.exports = {
   crearVenta,
   modificarVenta,
   eliminarVenta,
-  obtenerDetalleVenta
+  obtenerDetalleVenta,
+  obtenerDetallesVentas
 };
